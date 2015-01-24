@@ -118,23 +118,18 @@ def background_thread():
                       {'data': 'Server generated event', 'count': count},
                       namespace='/test')
 
-@app.route('/avatar')
-def avatar():
-    form = SigninForm()
-    return render_template('createAvatar.html', form=form)
-
 @app.route('/customize')
 def customize():
     return render_template('customize.html')
 
 @app.route('/')
-@login_required
 def index():
+    form = SigninForm()
     global thread
     if thread is None:
         thread = Thread(target=background_thread)
         thread.start()
-    return render_template('index.html', user=g.user)
+    return render_template('index.html', user=g.user, form=form)
 @app.route('/play')
 def play():
     global thread

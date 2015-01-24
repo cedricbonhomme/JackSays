@@ -1,163 +1,151 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Flask-SocketIO Test</title>
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
-    <script type="text/javascript" charset="utf-8">
-    
-    function createCookie(name,value,days) {
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+(days*24*60*60*1000));
-		var expires = "; expires="+date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie = name+"="+value+expires+"; path=/";
-}
 
-function readCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0;i < ca.length;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-	}
-	return null;
-}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-function eraseCookie(name) {
-	createCookie(name,"",-1);
-}
+    <title>Freelancer - Start Bootstrap Theme</title>
 
-        $(document).ready(function(){
-            namespace = '/test'; 
-            socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
-            
-            socket.on('connect', function() {
-                socket.emit('my event', {data: 'I\'m connected!'});
-            });
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
 
-            // event handler for server sent data
-            // the data is displayed in the "Received" section of the page
-	    socket.on('err', function(msg) {
-                window.alert(msg.data);
-            });
+    <!-- Custom CSS -->
+    <link href="../static/css/freelancer.css" rel="stylesheet">
 
+    <!-- jQuery -->
+    <script src="../static/js/jquery.js"></script>
 
-            socket.on('user list', function(msg) {
-                $('#usr').text(msg.data);
-            });
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/js/bootstrap.min.js"></script>
 
-            socket.on('my response', function(msg) {
-                $('#log').append('<br>'+msg.data);
-            });
+    <!-- Plugin JavaScript -->
+    <script src="../static/js/classie.js"></script>
+    <script src="../static/js/cbpAnimatedHeader.js"></script>
 
-            // handlers for the different forms in the page
-            // these send data to the server in a variety of ways
-	    $('form#nic').submit(function(event) {
-                socket.emit('nic', {data: $('#nic_data').val()});
-                return false;
-            });
-            $('form#emit').submit(function(event) {
-                socket.emit('my event', {data: $('#emit_data').val()});
-                return false;
-            });
-            $('form#broadcast').submit(function(event) {
-                socket.emit('my broadcast event', {data: $('#broadcast_data').val()});
-                return false;
-            });
-            $('form#join').submit(function(event) {
-                socket.emit('join', {room: $('#join_room').val()});
-                return false;
-            });
-            $('form#leave').submit(function(event) {
-                socket.emit('leave', {room: $('#leave_room').val()});
-                return false;
-            });
-            $('form#send_room').submit(function(event) {
-                socket.emit('my room event', {room: $('#room_name').val(), data: $('#room_data').val()});
-                return false;
-            });
-            $('form#close').submit(function(event) {
-                socket.emit('close room', {room: $('#close_room').val()});
-                return false;
-            });
-            $('form#disconnect').submit(function(event) {
-                socket.emit('disconnect request');
-                return false;
-            });
-            $('form#game1').submit(function(event) {
-                socket.emit('game', {data: "game1"});
-                return false;
-            });
+    <!-- Custom Theme JavaScript -->
+    <script src="../static/js/freelancer.js"></script>
 
-		
-            socket.on('user list', function(msg) {
-                $('#users').text(msg.data);
-            });
-        });
-    </script>
+    <!-- JQuery cookies -->
+    <script src="../static/js/jquery.cookie.js"></script>
+
+    <!-- swipe -->
+    <script src="../static/js/jquery.touchSwipe.js"></script>
+
 </head>
-<body>
-    <h1>Flask-SocketIO Test</h1>
-    <a id="next" >Play!</a>
-    {{ user.nic }}
-    <h2>Send:</h2>
- 	<form id="nic" method="POST" action='#'>
-        <input type="text" name="nic_data" id="nic_data" placeholder="Handler">
-        <input type="submit" value="Nic">
-    </form>
-    <form id="emit" method="POST" action='#'>
-        <input type="text" name="emit_data" id="emit_data" placeholder="Message">
-        <input type="submit" value="Echo">
-    </form>
-    <form id="broadcast" method="POST" action='#'>
-        <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
-        <input type="submit" value="Broadcast">
-    </form>
-    <form id="join" method="POST" action='#'>
-        <input type="text" name="join_room" id="join_room" placeholder="Room Name">
-        <input type="submit" value="Join Room">
-    </form>
-    <form id="leave" method="POST" action='#'>
-        <input type="text" name="leave_room" id="leave_room" placeholder="Room Name">
-        <input type="submit" value="Leave Room">
-    </form>
-    <form id="send_room" method="POST" action='#'>
-        <input type="text" name="room_name" id="room_name" placeholder="Room Name">
-        <input type="text" name="room_data" id="room_data" placeholder="Message">
-        <input type="submit" value="Send to Room">
-    </form>
-    <form id="close" method="POST" action="#">
-        <input type="text" name="close_room" id="close_room" placeholder="Room Name">
-        <input type="submit" value="Close Room">
-    </form>
-    <form id="disconnect" method="POST" action="#">
-        <input type="submit" value="Disconnect">
-    </form>
-    <h2>Users:</h2>
-    <div id="usr"></div>
-    <h2>Receive:</h2>
-    <div id="log"></div>
-    
-    
-<div id="game">
-	<div id="game1">
-		<form id="game1" method="POST" action='#'>
-        	<input type="submit" value="Push me!">	
-	</div>
+
+<body id="page-top" class="index">
+
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#customize">Customize Avatar</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#about">About</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<header id="whatNext">
+    <div class="container">
+        <form action="login" method="POST" id="formLogin">
+            {{ form.hidden_tag() }}
+            <div class="row">
+                <div class="col-xs-1 col-sm-2 col-md-3"></div>
+                <div class="col-xs-5 col-sm-4 col-md-3">
+                    <input  name="login" style="text-align: center" type="text"
+                            class="form-control" placeholder="Nickname ...">
+                </div>
+
+                <div class="col-xs-5 col-sm-4 col-md-3" style="margin-bottom: 30px">
+                    <button id="buttBack" type="button" class="btn btn-primary btn-block">Back again ... </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="../static/img/profile.png" alt="">
+                    <div class="intro-text">
+                        <span class="name">Best Score</span>
+                        <hr class="star-light">
+                        <span class="skills">Web Developer - Graphic Artist - User Experience Designer</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</header>
+
+<section id="customize">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <a onclick="customize('female')"><img class="img-responsive" src="../static/img/avatar/female.png" alt=""></a>
+            </div>
+            <div class="col-md-4">
+                <a onclick="customize('male')"><img class="img-responsive" src="../static/img/avatar/male.png" alt=""></a>
+            </div>
+            <div class="col-md-4">
+                <a onclick="customize('robot')"><img class="img-responsive" src="../static/img/avatar/robot.png" alt=""></a>
+            </div>
+        </div>
+    </div>
+</section>
 
 
-    </div>
- 	
-    </form>
-    <div id="users">
-    </div>
-<div id="log">
-    </div>
-</div>
-</div>
+<script>
+
+    function customize(choice){
+        $.cookie('choice', choice);
+        window.location.href = "customize";
+    }
+</script>
+
+<!-- jQuery -->
+<script src="../static/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../static/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="../static/js/classie.js"></script>
+<script src="../static/js/cbpAnimatedHeader.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../static/js/freelancer.js"></script>
+
+<!-- JQuery cookies -->
+<script src="../static/js/jquery.cookie.js"></script>
+
 </body>
+
 </html>
