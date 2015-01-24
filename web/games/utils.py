@@ -37,4 +37,3 @@ class PickOne (Game):
     def finalize(self):
         if self.data.items() != []:
             result = reduce(lambda x,y: x if self.data[x]<=self.data[y] else y, self.data.iterkeys())
-            print result

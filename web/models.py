@@ -32,9 +32,10 @@ class Game(object):
         self.duration = 30.0
         self.data = None
         self.stime = time.time()
+
     def get_time_left(self):
         return self.duration-(time.time()-self.stime)
-            
+
     def get_data(self):
         return None
 

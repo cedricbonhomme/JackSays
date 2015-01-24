@@ -29,8 +29,8 @@ def unload_game():
 
 def load_game(game):
     global current_game
-    
     current_game = game
+    current_game.__init__()
     current_game.stime = time.time()
     print("loading "+current_game.game_id,current_game.get_time_left())
     t = Timer(current_game.get_time_left(),unload_game)
