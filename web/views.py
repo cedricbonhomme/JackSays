@@ -14,6 +14,7 @@ from web import app, socketio
 
 thread = None
 
+users = []
 
 def background_thread():
     """Example of how to send server generated events to clients."""
@@ -34,6 +35,19 @@ def index():
         thread.start()
     return render_template('index.html')
 
+@socketio.on('nic', namespace='/test')
+def change_nic(message):
+    if message['data'] in users:
+        emit('err',
+         {'data': message['data']+" is already taken!"})
+    else:
+        join_room(message['data'])
+        users.append(message['data'])
+        emit('user list',
+             {'data': ",".join(users)},
+             broadcast=True)
+        emit('my response',
+             {'data': "user changed alias - "+message['data'], 'count': session['receive_count']})
 
 @socketio.on('my event', namespace='/test')
 def test_message(message):
@@ -66,7 +80,6 @@ def leave(message):
     emit('my response',
          {'data': 'In rooms: ' + ', '.join(request.namespace.rooms),
           'count': session['receive_count']})
-
 
 @socketio.on('close room', namespace='/test')
 def close(message):
@@ -101,6 +114,9 @@ def test_connect():
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
     print('Client disconnected')
+    emit('my response',
+         {'data': "/quit", 'count': session['receive_count']},
+         broadcast=True)
 
 
 if __name__ == '__main__':
