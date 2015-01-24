@@ -7,7 +7,7 @@ class WaitGame (Game):
     def __init__(self):
         self.game_id = "wait"
         self.start_time= time.time()
-        self.duration = 10
+        self.duration = 60
         self.param = None
     def get_data(self):
         return self.duration

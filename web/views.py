@@ -133,8 +133,9 @@ def index():
     return render_template('index.html', user=g.user, form=form)
 @app.route('/play')
 def play():
+    form = SigninForm()
     global thread
     if thread is None:
         thread = Thread(target=background_thread)
         thread.start()
-    return render_template('index.html')
+    return render_template('index.html', form=form)
