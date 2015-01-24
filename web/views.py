@@ -26,6 +26,14 @@ def background_thread():
                       namespace='/test')
 
 
+@app.route('/avatar')
+def avatar():
+    return render_template('createAvatar.html')
+
+@app.route('/customize')
+def customize():
+    return render_template('customize.html')
+
 @app.route('/')
 def index():
     global thread
