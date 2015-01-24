@@ -15,82 +15,72 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../static/js/bootstrap.min.js"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="../static/js/classie.js"></script>
-    <script src="../static/js/cbpAnimatedHeader.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="../static/js/freelancer.js"></script>
-
-    <!-- JQuery cookies -->
-    <script src="../static/js/jquery.cookie.js"></script>
-
-    
     <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
     <script type="text/javascript" charset="utf-8">
 
-        $(document).ready(function(){
-            namespace = '/test'; // change to an empty string to use the global namespace
+    $(document).ready(function(){
+        namespace = '/test'; // change to an empty string to use the global namespace
 
-            // the socket.io documentation recommends sending an explicit package upon connection
-            // this is specially important when using the global namespace
+        // the socket.io documentation recommends sending an explicit package upon connection
+        // this is specially important when using the global namespace
 
-            socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+        socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
 
-            socket.on('connect', function() {
-                socket.emit('my event', {data: 'I\'m connected!'});
-                socket.emit('get game id', {});
-                console.log("invoking start");
-            });
-            socket.on('game id', function(msg) {
-                console.log(msg);
-                socket.emit('my event', {data: 'I\'m connected!'});
-                var elements = $('#games').children();
+        socket.on('connect', function() {
+            socket.emit('my event', {data: 'I\'m connected!'});
+            socket.emit('get game id', {});
+            console.log("invoking start");
+        });
+        socket.on('game id', function(msg) {
+            console.log(msg);
+            socket.emit('my event', {data: 'I\'m connected!'});
+            var elements = $('#games').children();
 
-                for (var i = 0; i < elements.length; i++) {
-                    $(elements[i]).hide();
-                }
-                $('#'+msg.id).show();
-                socket.emit('get game data', {});
-            });
-            socket.on('game data', function(msg) {console.log(msg)});
+            for (var i = 0; i < elements.length; i++) {
+                $(elements[i]).hide();
+            }
+            $('#'+msg.id).show();
+            socket.emit('get game data', {});
+        });
+        socket.on('game data', function(msg) {console.log(msg)});
 
-            // event handler for server sent data
-            // the data is displayed in the "Received" section of the page
-	    socket.on('err', function(msg) {
-                window.alert(msg.data);
-            });
+        // event handler for server sent data
+        // the data is displayed in the "Received" section of the page
+        socket.on('err', function(msg) {
+            window.alert(msg.data);
+        });
 
-	 $('form#game1').submit(function(event) {
-                socket.emit('game', {data: "game1"});
-                return false;
-            });
+        $('form#game1').submit(function(event) {
+            socket.emit('game', {data: "game1"});
+            return false;
+        });
 
-		
-            socket.on('user list', function(msg) {
-                $('#users').text(msg.data);
-            });
+        socket.on('user list', function(msg) {
+            $('#users').text(msg.data);
+        });
 })
 
     </script>
 </head>
 <body>
     <div class="container">
-        <div id="games">
-            <div id="game1">
-                <form id="game1" method="POST" action='#'/>
-                    <input type="submit" value="Push me!"/>
-                </form>
-            </div>
-            <div id="pickone">
-                <button type="button" class="btn btn-default" aria-label="Left Align"></button>
-                <button type="button" class="btn btn-primary" aria-label="Left Align"></button>
-            </div>
-            <div id="wait" style="background-color:red;height:100px;width:100px" >
+        <div class="row">
+            <div id="games">
+                <div id="game1">
+                    <form id="game1" method="POST" action='#'/>
+                        <input type="submit" value="Push me!"/>
+                    </form>
+                </div>
+                <div id="pickone">
+                    <button type="button" class="btn btn-default" aria-label="Left Align"></button>
+                    <button type="button" class="btn btn-primary" aria-label="Left Align"></button>
+                </div>
+                <div id="wait" style="background-color:red;height:100px;width:100px" >
+
+                </div>
 
             </div>
-
         </div>
     </div>
     <div id="users">
