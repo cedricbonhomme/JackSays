@@ -120,7 +120,8 @@ def background_thread():
 
 @app.route('/customize')
 def customize():
-    return render_template('customize.html')
+    form = SigninForm()
+    return render_template('customize.html',form=form)
 
 @app.route('/')
 def index():
