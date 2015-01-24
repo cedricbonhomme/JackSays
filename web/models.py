@@ -15,12 +15,15 @@ class User(object):
 
 class Game(object):
     """
-    Represent a mini game
+    Represent a mini game.
     """
     def __init__(self):
         self.user_vals = {}
+        self.game_id = 0
+
     def user_input(self, username, param):
         self.user[username] = param
+
     def finalize(self):
         """
         overload this method
