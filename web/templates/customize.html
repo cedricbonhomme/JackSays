@@ -17,11 +17,6 @@
     <!-- Custom CSS -->
     <link href="../static/css/freelancer.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
     <!-- jQuery -->
     <script src="../static/js/jquery.js"></script>
 
@@ -38,12 +33,15 @@
     <!-- JQuery cookies -->
     <script src="../static/js/jquery.cookie.js"></script>
 
+    <!-- swipe -->
+    <script src="../static/js/jquery.touchSwipe.js"></script>
+
 
 </head>
 <body id="page-top" class="index">
 
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default ">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -78,62 +76,85 @@
     <!-- /.container-fluid -->
 </nav>
 
-<!-- Header -->
-<header>
-    <div class="container">
-        <div id="female">
-            <div class="row">
-                <div class="col-md-4 col-xs-2" style="text-align: right">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                </div>
-                <div class="col-md-4 col-xs-8" >
-                    <img class="img-responsive" src="../static/img/avatar/custom/ft1.png" alt="" style="margin-bottom: 0">
-                </div>
-                <div class="col-md-4 col-xs-2" style="text-align: left">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-xs-2" style="text-align: right">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                </div>
-                <div class="col-md-4 col-xs-8" >
-                    <img class="img-responsive" src="../static/img/avatar/custom/fm1.png" alt="" style="margin-bottom: 0">
-                </div>
-                <div class="col-md-4 col-xs-2" style="text-align: left">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 col-xs-2" style="text-align: right">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                </div>
-                <div class="col-md-4 col-xs-8" >
-                    <img class="img-responsive" src="../static/img/avatar/custom/fb1.png" alt="" style="margin-bottom: 0">
-                </div>
-                <div class="col-md-4 col-xs-2" style="text-align: left">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                </div>
-            </div>
+<div class="container">
+    <div class="row">
+    <div class="col-md-4 col-sm-2"></div>
+    <div class="col-md-4 col-sm-8">
+        <form action="login" method="POST" id="formLogin">
+            <input id="nickName" name="nic" style="text-align: center" type="text"
+                   class="form-control btn-outline" placeholder="Nickname ..." required="required">
+        </form>
+    </div><!-- /.col-lg-6 -->
+    <div class="col-md-4 col-sm-2"></div>
+</div><!-- /.row -->
+
+<!-- empty div -->
+
+<div id="female">
+
+</div>
+
+<div id="male" style="margin-top: 20px;margin-bottom: 20px">
+    <div class="row">
+        <div class="col-md-4 col-xs-3" style="text-align: right;margin-top: 3%">
+            <img src="../static/img/avatar/arrow_left.gif" onclick="updateTop(-1)" alt="" width="32px" height="32px">
         </div>
-
-
-        <div class="row" id="male">
-            <div class="col-md-12">
-                <img class="img-responsive" src="../static/img/avatar/custom/malexl.png" alt="">
-            </div>
+        <div class="col-md-4 col-xs-6" id="divMaleTop">
+            <img id="maleTop" class="img-responsive" src="../static/img/avatar/custom/top0.png" alt="" style="margin-bottom: 0">
         </div>
-
-        <div class="row" id="robot">
-            <div class="col-md-12">
-                <img class="img-responsive" src="../static/img/avatar/custom/robotxl.png" alt="">
-            </div>
+        <div class="col-md-4 col-xs-1" style="text-align: left;margin-top: 3%">
+            <img src="../static/img/avatar/arrow_right.gif" onclick="updateTop(1)" alt="" width="32px" height="32px">
         </div>
     </div>
-</header>
+    <div class="row">
+        <div class="col-md-4 col-xs-3" style="text-align: right;margin-top: 1%">
+            <img src="../static/img/avatar/arrow_left.gif" onclick="updateMiddle(-1)" alt="" width="32px" height="32px">
+        </div>
+        <div class="col-md-4 col-xs-6" id="divMaleMiddle" style="vertical-align: bottom">
+            <img id="maleMiddle" class="img-responsive" src="../static/img/avatar/custom/middle0.png" alt="" style="margin-bottom: 0">
+        </div>
+        <div class="col-md-4 col-xs-1" style="text-align: left;margin-top: 1%">
+            <img src="../static/img/avatar/arrow_right.gif" onclick="updateMiddle(1)" alt="" width="32px" height="32px">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-xs-3" style="text-align: right;margin-top: 4%">
+            <img src="../static/img/avatar/arrow_left.gif" onclick="updateBottom(-1)" alt="" width="32px" height="32px">
+        </div>
+        <div class="col-md-4 col-xs-6" id="divMaleBottom">
+            <img id="maleBottom" class="img-responsive" src="../static/img/avatar/custom/bottom0.png" alt="" style="margin-bottom: 0">
+        </div>
+        <div class="col-md-4 col-xs-1" style="text-align: left;margin-top: 4%">
+            <img src="../static/img/avatar/arrow_right.gif" onclick="updateBottom(1)" alt="" width="32px" height="32px">
+        </div>
+    </div>
+</div>
+
+<div id="robot">
+
+</div>
+
+<div class="row">
+    <div class="col-xs-1 col-sm-2 col-md-3"></div>
+    <div class="col-xs-4 col-sm-3 col-md-2">
+        <button id="buttBack" type="button" class="btn btn-outline btn-block">Back</button>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2"></div>
+    <div class="col-xs-4 col-sm-3 col-md-2">
+        <button id="buttStart" type="button" class="btn btn-outline btn-block">Start</button>
+    </div>
+</div>
+
+</div><!-- end container -->
 
 
 <script>
+    var type;
+    var head;
+    var middle;
+    var bottom;
+    
+    
     $( document ).ready(function() {
         $("#female").hide();
         $("#male").hide();
@@ -141,8 +162,82 @@
 
         var toShow = "#" + $.cookie('choice');
         $(toShow).show();
+        head = 1;
+        middle = 1;
+        bottom = 1;
+        type = $.cookie('choice');
 
+        //swipe events
+        $("#divFemaleTop").swipe({
+            swipe:function(event, direction, distance, duration, fingerCount) {
+                if (direction == "left") {updateTop(1);} else if (direction == "right"){updateTop(-1);}
+            }
+        });
+        $("#divFemaleMiddle").swipe({
+            swipe:function(event, direction, distance, duration, fingerCount) {
+                if (direction == "left") {updateMiddle(1);} else if (direction == "right"){updateMiddle(-1);}
+            }
+        });
+        $("#divFemaleBottom").swipe({
+            swipe:function(event, direction, distance, duration, fingerCount) {
+                if (direction == "left") {updateBottom(1);} else if (direction == "right"){updateBottom(-1);}
+            }
+        });
+        $("#divMaleTop").swipe({
+            swipe:function(event, direction, distance, duration, fingerCount) {
+                if (direction == "left") {updateTop(1);} else if (direction == "right"){updateTop(-1);}
+            }
+        });
+        $("#divMaleMiddle").swipe({
+            swipe:function(event, direction, distance, duration, fingerCount) {
+                if (direction == "left") {updateMiddle(1);} else if (direction == "right"){updateMiddle(-1);}
+            }
+        });
+        $("#divMaleBottom").swipe({
+            swipe:function(event, direction, distance, duration, fingerCount) {
+                if (direction == "left") {updateBottom(1);} else if (direction == "right"){updateBottom(-1);}
+            }
+        });
+
+        //buttons
+        $("#buttBack").click(function (){
+            window.location.href = "avatar";
+        });
     });
+    
+    function updateTop(val){
+        if ( (head==1 && val==-1 ) || (head==3 && val == 1) ) return;
+
+        var newHead = head + val;
+        var img = "../static/img/avatar/custom/"+ type.charAt(0)+'t-'+ head +"-" +newHead + ".gif";
+        var id = "#" + type+"Top";
+        $(id).attr('src',img);
+
+        head= newHead;
+    }
+
+    function updateMiddle(val){
+        if ( (middle==1 && val==-1 ) || (middle==3 && val == 1) ) return;
+
+        var newMiddle = middle + val;
+        var img = "../static/img/avatar/custom/"+ type.charAt(0)+'m-'+ middle +"-" +newMiddle + ".gif";
+        var id = "#" + type+"Middle";
+        $(id).attr('src',img);
+
+        middle = newMiddle;
+
+    }
+
+    function updateBottom(val){
+        if ( (bottom==1 && val==-1 ) || (bottom==3 && val == 1) ) return;
+
+        var newBottom = bottom + val;
+        var img = "../static/img/avatar/custom/"+ type.charAt(0)+'b-'+ bottom +"-" +newBottom + ".gif";
+        var id = "#" + type+"Bottom";
+        $(id).attr('src',img);
+
+        bottom = newBottom;
+    }
 </script>
 
 
