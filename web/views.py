@@ -19,7 +19,7 @@ from flask.ext.principal import Principal, Identity, AnonymousIdentity
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-from games.utils import WaitGame
+from games.utils import WaitGame, PickOne
 from core import load_game
 
 
@@ -103,7 +103,7 @@ def index():
     return render_template('index.html', user=g.user, form=form)
 @app.route('/play')
 def play():
-    w = WaitGame()
+    w = PickOne()
     duration = 60.0
     load_game(w)
     return render_template('play.html')

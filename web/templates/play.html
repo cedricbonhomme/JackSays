@@ -2,6 +2,30 @@
 <html>
 <head>
     <title>Simone says</title>
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../static/css/freelancer.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="../static/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../static/js/classie.js"></script>
+    <script src="../static/js/cbpAnimatedHeader.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../static/js/freelancer.js"></script>
+
+    <!-- JQuery cookies -->
+    <script src="../static/js/jquery.cookie.js"></script>
+
+    
     <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
     <script type="text/javascript" charset="utf-8">
@@ -11,9 +35,9 @@
 
             // the socket.io documentation recommends sending an explicit package upon connection
             // this is specially important when using the global namespace
-            
+
             socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
-            
+
             socket.on('connect', function() {
                 socket.emit('my event', {data: 'I\'m connected!'});
                 socket.emit('get game id', {});
@@ -48,25 +72,30 @@
                 $('#users').text(msg.data);
             });
 })
-            
+
     </script>
 </head>
 <body>
-    <div id="games">
-	    <div id="game1">
-		    <form id="game1" method="POST" action='#'/>
-        	    <input type="submit" value="Push me!"/>	
-        </div>
-        <div id="wait" style="background-color:red;height:100px;width:100px" >
-        
-        </div>
+    <div class="container">
+        <div id="games">
+            <div id="game1">
+                <form id="game1" method="POST" action='#'/>
+                    <input type="submit" value="Push me!"/>
+                </form>
+            </div>
+            <div id="pickone">
+                <button type="button" class="btn btn-default" aria-label="Left Align"></button>
+                <button type="button" class="btn btn-primary" aria-label="Left Align"></button>
+            </div>
+            <div id="wait" style="background-color:red;height:100px;width:100px" >
 
+            </div>
+
+        </div>
     </div>
- 	
-    </form>
     <div id="users">
     </div>
-<div id="log">
+    <div id="log">
     </div>
 </body>
 </html>
