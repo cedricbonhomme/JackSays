@@ -32,24 +32,10 @@ function eraseCookie(name) {
 }
 
         $(document).ready(function(){
-            namespace = '/test'; // change to an empty string to use the global namespace
-
-            // the socket.io documentation recommends sending an explicit package upon connection
-            // this is specially important when using the global namespace
-           /* if (readCookie('sessionid')!==null)
-            {
-            sessionid=readCookie('sessionid');
-            eraseCookie('sessionid');
-            }*/
+            namespace = '/test'; 
             socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
             
             socket.on('connect', function() {
-                /*if ( 'undefined' == typeof sessionid)
-                    sessionid = socket.socket.sessionid;
-                else
-                    socket.socket.sessionid=sessionid;
-                createCookie('sessionid',sessionid,1)*/
-                 $('#next').attr("href","play?sessionid="+socket.socket.sessionid);
                 socket.emit('my event', {data: 'I\'m connected!'});
             });
 
@@ -65,7 +51,7 @@ function eraseCookie(name) {
             });
 
             socket.on('my response', function(msg) {
-                $('#log').append('<br>Received #' + msg.count + ': ' + msg.data);
+                $('#log').append('<br>'+msg.data);
             });
 
             // handlers for the different forms in the page

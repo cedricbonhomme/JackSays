@@ -132,11 +132,11 @@ def index():
     if thread is None:
         thread = Thread(target=background_thread)
         thread.start()
-    return render_template('index.html')
+    return render_template('index.html', user=g.user)
 @app.route('/play')
 def play():
     global thread
     if thread is None:
         thread = Thread(target=background_thread)
         thread.start()
-    return render_template('index.html', user=g.user)
+    return render_template('index.html')
