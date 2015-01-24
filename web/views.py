@@ -73,10 +73,8 @@ def load_user(nic):
     # Return an instance of the User model
     #return User.query.filter(User.email == email).first()
     for user in USERS:
-        if user.nic == nic:
-            print user
-            return user
-    print "None"
+        if user == nic:
+            return USERS[user]
     return None
 
 
@@ -93,7 +91,7 @@ def login():
 
     if form.validate_on_submit():
         user = User(form.login.data, 0)
-        USERS.append(user)
+        USERS[user.nic] = user
         login_user(user)
         g.user = user
         session['login'] = form.login.data
