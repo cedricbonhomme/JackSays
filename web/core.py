@@ -21,22 +21,22 @@ from games.utils import WaitGame
 from threading import Timer
 
 def unload_game():
-    current_game.finalize()
+    globals()["current_game"].finalize()
 
 def load_game(game):
     print("loading "+game.game_id)
-    current_game = game
-    t = Timer(current_game.duration,unload_game)
+    globals()["current_game"] = game
+    t = Timer(globals()["current_game"].duration,unload_game)
     t.start()
 @socketio.on('get game id', namespace='/test')    
 def get_current_game(msg):
-    if current_game is None:
+    if globals()["current_game"] is None:
         w = WaitGame()
         w.duration = 60
         load_game(w)
     print("get game id ???")
     emit('game id',
-         {'id': current_game.game_id,'param' : current_game.param})
+         {'id': globals()["current_game"].game_id,'param' : globals()["current_game"].param})
 @socketio.on('get game data', namespace='/test')    
 def get_game_data(msg):
     emit('game data',
