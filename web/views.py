@@ -88,8 +88,10 @@ def login():
 
     g.user = AnonymousUserMixin()
     form = SigninForm()
+    print form.login.data
 
     if form.validate_on_submit():
+        print "validated"
         user = User(form.login.data, 0)
         USERS[user.nic] = user
         login_user(user)
@@ -97,7 +99,8 @@ def login():
         session['login'] = form.login.data
         flash("Logged in successfully.", 'success')
         return redirect(url_for('index'))
-    return render_template('login.html', form=form)
+    print "not validated"
+    return render_template('customize.html', form=form)
 
 
 

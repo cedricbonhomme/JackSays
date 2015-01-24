@@ -13,7 +13,7 @@ class SigninForm(Form):
     """
     Sign in form.
     """
-    login = TextField("Login", [validators.Length(min=6, max=35), validators.Required("Please enter your login.")])
+    login = TextField("Login", [validators.Length(min=2, max=35), validators.Required("Please enter your login.")])
     submit = SubmitField("Log In")
 
     def __init__(self, *args, **kwargs):
@@ -23,8 +23,8 @@ class SigninForm(Form):
         if not Form.validate(self):
             return False
 
-        #user = User.query.filter(User.email == self.email.data).first()
         return True
+        #user = User.query.filter(User.email == self.email.data).first()
         """
         if user and user.check_password(self.password.data) and user.activation_key == "":
             return True
