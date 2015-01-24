@@ -8,8 +8,9 @@ class WaitGame (Game):
         self.game_id = "wait"
         self.start_time= time.time()
         self.duration = 10
-    def get_data():
-        return None
+        self.param = None
+    def get_data(self):
+        return self.duration
     def user_input(self, username, param):
         pass
     def finalize(self):
