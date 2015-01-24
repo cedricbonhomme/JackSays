@@ -27,7 +27,7 @@ def background_thread():
                       {'data': 'Server generated event', 'count': count},
                       namespace='/test')
 
-<<<<<<< HEAD
+
 def add_user(user):
     if user.nic in users:
         return False
