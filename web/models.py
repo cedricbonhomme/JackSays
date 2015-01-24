@@ -1,7 +1,9 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-class User(object):
+from flask.ext.login import UserMixin
+
+class User(UserMixin):
     """
     Represent a user.
     """
@@ -9,6 +11,12 @@ class User(object):
         self.nic = nic
         self.score = score
 
+    def get_id(self):
+        """
+        Return the id of the user.
+        """
+        return self.nic
+        
     def dump(self):
         return {"nic": self.nic,
                 "score": self.score}
