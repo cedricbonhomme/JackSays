@@ -3,6 +3,8 @@
 from web.models import Game
 import time
 
+
+
 class WaitGame (Game):
     def __init__(self):
         super(self.__class__, self).__init__()
@@ -22,7 +24,7 @@ class PickOne (Game):
         super(self.__class__, self).__init__()
         self.game_id = "pickone"
         self.start_time= time.time()
-        self.duration = 60
+        self.duration = 10
         self.param = None
     def get_data(self):
         return self.duration

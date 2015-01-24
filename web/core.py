@@ -17,19 +17,23 @@ NAMESPACE = "/test"
 current_game = None
 from models import Game
 from games.utils import WaitGame
-
+from random import choice
 from threading import Timer
+import copy
+import time
 
 def unload_game():
     global current_game
     print("finalized")
     current_game.finalize()
+    load_game(copy.copy(choice(game_list)))
 
 def load_game(game):
     global current_game
     print("loading "+game.game_id)
     current_game = game
-    t = Timer(current_game.duration,unload_game)
+    current_game.stime = time.time()
+    t = Timer(current_game.get_time_left(),unload_game)
     t.start()
 
 @socketio.on('get game id', namespace='/test')

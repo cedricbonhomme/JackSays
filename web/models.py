@@ -33,7 +33,7 @@ class Game(object):
         self.param = None
         self.stime = time.time()
     def get_time_left(self):
-        return time.time()-self.stime-1000*self.duration
+        return self.duration-(time.time()-self.stime)
             
     def get_data(self):
         return None
