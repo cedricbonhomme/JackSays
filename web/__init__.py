@@ -12,4 +12,6 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 thread = None
 
-import web.views
+USERS = {}
+
+from web import core, views

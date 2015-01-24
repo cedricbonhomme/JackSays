@@ -5,12 +5,36 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
     <script type="text/javascript" charset="utf-8">
-        $(document).ready(function(){
-            namespace = '/test'; // change to an empty string to use the global namespace
+    
+    function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
 
-            // the socket.io documentation recommends sending an explicit package upon connection
-            // this is specially important when using the global namespace
-            var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+
+        $(document).ready(function(){
+            namespace = '/test'; 
+            socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+            
             socket.on('connect', function() {
                 socket.emit('my event', {data: 'I\'m connected!'});
             });
@@ -27,7 +51,7 @@
             });
 
             socket.on('my response', function(msg) {
-                $('#log').append('<br>Received #' + msg.count + ': ' + msg.data);
+                $('#log').append('<br>'+msg.data);
             });
 
             // handlers for the different forms in the page
@@ -64,11 +88,22 @@
                 socket.emit('disconnect request');
                 return false;
             });
+            $('form#game1').submit(function(event) {
+                socket.emit('game', {data: "game1"});
+                return false;
+            });
+
+		
+            socket.on('user list', function(msg) {
+                $('#users').text(msg.data);
+            });
         });
     </script>
 </head>
 <body>
     <h1>Flask-SocketIO Test</h1>
+    <a id="next" >Play!</a>
+    {{ user.nic }}
     <h2>Send:</h2>
  	<form id="nic" method="POST" action='#'>
         <input type="text" name="nic_data" id="nic_data" placeholder="Handler">
@@ -106,5 +141,23 @@
     <div id="usr"></div>
     <h2>Receive:</h2>
     <div id="log"></div>
+    
+    
+<div id="game">
+	<div id="game1">
+		<form id="game1" method="POST" action='#'>
+        	<input type="submit" value="Push me!">	
+	</div>
+
+
+    </div>
+ 	
+    </form>
+    <div id="users">
+    </div>
+<div id="log">
+    </div>
+</div>
+</div>
 </body>
 </html>
