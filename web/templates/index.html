@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Freelancer - Start Bootstrap Theme</title>
+    <title>SimonSays</title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
@@ -36,6 +36,12 @@
     <!-- swipe -->
     <script src="../static/js/jquery.touchSwipe.js"></script>
 
+    <style>
+        .thumbnail {
+            border: 0 none;
+            box-shadow: none;
+        }
+    </style>
 </head>
 
 <body id="page-top" class="index">
@@ -51,7 +57,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+            <a class="navbar-brand" href="#page-top">SimonSays</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -83,7 +89,7 @@
             <div class="row">
                 <div class="col-xs-1 col-sm-2 col-md-3"></div>
                 <div class="col-xs-5 col-sm-4 col-md-3">
-                    <input  name="login" style="text-align: center" type="text"
+                    <input  name="login" style="text-align: center" type="text" id="nickName"
                             class="form-control" placeholder="Nickname ...">
                 </div>
 
@@ -92,7 +98,66 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
+                <!-- known person -->
+                <div class="col-lg-12" id="knownPerson">
+                    <!-- is male -->
+                    <div id="divmale" style="margin-top: 20px;margin-bottom: 20px">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
+                            <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleTop">
+                                <img id="maleTop" class="img-responsive" src="" alt="" style="margin-bottom: 0" >
+                            </div>
+                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
+                            <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleMiddle" style="vertical-align: bottom">
+                                <img id="maleMiddle" class="img-responsive" src="" alt="" style="margin-bottom: 0" >
+                            </div>
+                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
+                            <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleBottom">
+                                <img id="maleBottom" class="img-responsive" src="" alt="" style="margin-bottom: 0">
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-xs-3"></div>
+                        </div>
+                    </div>
+                    <!-- is female -->
+                    <div id="divfemale" style="margin-top: 20px;margin-bottom: 20px">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4 col-xs-6"></div>
+                            <div class="col-md-4 col-xs-6" id="divFemaleTop">
+                                <img id="femaleTop" class="img-responsive" src="" alt="" style="margin-bottom: 0">
+                            </div>
+                            <div class="col-sm-3 col-md-4 col-xs-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4 col-xs-6"></div>
+                            <div class="col-md-4 col-xs-6" id="divFemaleMiddle" style="vertical-align: bottom">
+                                <img id="femaleMiddle" class="img-responsive" src="" alt="" style="margin-bottom: 0">
+                            </div>
+                            <div class="col-sm-3 col-md-4 col-xs-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4 col-xs-6"></div>
+                            <div class="col-md-4 col-xs-6" id="divFemaleBottom">
+                                <img id="femaleBottom" class="img-responsive" src="" alt="" style="margin-bottom: 0">
+                            </div>
+                            <div class="col-sm-3 col-md-4 col-xs-6"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="coll-lg-12">
+                            <button id="forgetMe" type="button" class="btn btn-primary">Forget Me</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- anonymous -->
+                <div class="col-lg-12" id="anonymousAvatar">
                     <img class="img-responsive" src="../static/img/profile.png" alt="">
                     <div class="intro-text">
                         <span class="name">Best Score</span>
@@ -106,23 +171,74 @@
 </header>
 
 <section id="customize">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <a onclick="customize('female')"><img class="img-responsive" src="../static/img/avatar/female.png" alt=""></a>
-            </div>
-            <div class="col-md-4">
-                <a onclick="customize('male')"><img class="img-responsive" src="../static/img/avatar/male.png" alt=""></a>
-            </div>
-            <div class="col-md-4">
-                <a onclick="customize('robot')"><img class="img-responsive" src="../static/img/avatar/robot.png" alt=""></a>
+    <div class="row">
+        <div class="col-sm-12 col-md-4">
+            <div class="thumbnail">
+                <img src="../static/img/avatar/female.png" alt="">
+                <div class="caption" style="text-align: center">
+                    <h3>Women</h3>
+                    <p>It's always nice to play with women</p>
+                    <p><a onclick="customize('female')" class="btn btn-primary" role="button">Let's Go</a></p>
+                </div>
             </div>
         </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="thumbnail">
+                <img src="../static/img/avatar/male.png" alt="">
+                <div class="caption" style="text-align: center">
+                    <h3>Men</h3>
+                    <p>But better with a man !!</p>
+                    <p><a onclick="customize('male')" id="customMen" class="btn btn-primary" role="button">Let's Go</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="thumbnail">
+                <img src="../static/img/avatar/robot.png" alt="">
+                <div class="caption" style="text-align: center">
+                    <h3>Robot</h3>
+                    <p>What about machines !!</p>
+                    <p><a onclick="customize('robot')" class="btn btn-primary" role="button">Let's Go</a></p>
+                </div>
+            </div>
+        </div>
+        <p style="margin-bottom: 150px">...</p>
     </div>
 </section>
 
 
 <script>
+    $( document ).ready(function() {
+        var nic = $.cookie('nic');
+        var type = $.cookie('choice');
+        var topImage = $.cookie('topImage');
+        var middleImage = $.cookie('middleImage');
+        var buttonImage = $.cookie('buttonImage');
+
+
+        $("#anonymousAvatar").hide();
+        $("#knownPerson").hide();
+        $("#divfemale").hide();
+        $("#divmale").hide();
+
+        if (nic){
+            $("#nickName").val(nic);
+            $("#knownPerson").show();
+            //load the right div
+            $("#div"+type).show();
+            //load images
+            $("#"+type+"Top").attr('src',topImage);
+            $("#"+type+"Middle").attr('src',middleImage);
+            $("#"+type+"Bottom").attr('src',buttonImage);
+        }else {
+            $("#anonymousAvatar").show();
+        }
+
+        $("#forgetMe").click(function(){
+            $.removeCookie('nic');
+            window.location.replace("/");
+        });
+    });
 
     function customize(choice){
         $.cookie('choice', choice);

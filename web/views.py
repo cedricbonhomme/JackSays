@@ -5,6 +5,7 @@ from gevent import monkey
 monkey.patch_all()
 
 import time
+from threading import Thread
 from flask import render_template, redirect, url_for, session, request, g, flash
 from flask.ext.socketio import SocketIO, emit, join_room, leave_room, \
     close_room, disconnect
@@ -13,14 +14,15 @@ from web import app, socketio, USERS
 from form import SigninForm
 from models import User
 
+thread = None
 from flask.ext.login import LoginManager, login_user, logout_user, \
                             login_required, current_user, AnonymousUserMixin
-from flask.ext.principal import Principal, Identity, AnonymousIdentity
+from flask.ext.principal import Principal, Identity, AnonymousIdentity, \
+                                identity_changed, identity_loaded, Permission,\
+                                RoleNeed, UserNeed
+
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-from games.utils import WaitGame
-from core import load_game
 
 
 #
@@ -51,9 +53,15 @@ def redirect_url(default='login'):
             url_for(default)
 
 
+
 #
 # Management of the user's session.
 #
+@identity_loaded.connect_via(app)
+def on_identity_loaded(sender, identity):
+    # Set the identity user object
+    identity.user = current_user
+
 @app.before_request
 def before_request():
     g.user = current_user
@@ -92,18 +100,41 @@ def login():
         return redirect(url_for('index'))
     return render_template('customize.html', form=form)
 
+
+
+
+
+
+
+
+
+def background_thread():
+    """Example of how to send server generated events to clients."""
+    count = 0
+    while True:
+        time.sleep(10)
+        count += 1
+        socketio.emit('my response',
+                      {'data': 'Server generated event', 'count': count},
+                      namespace='/test')
+
 @app.route('/customize')
 def customize():
     form = SigninForm()
-    return render_template('customize.html',form=form)
+    return render_template('customize.html', form=form)
 
 @app.route('/')
 def index():
     form = SigninForm()
+    global thread
+    if thread is None:
+        thread = Thread(target=background_thread)
+        thread.start()
     return render_template('index.html', user=g.user, form=form)
 @app.route('/play')
 def play():
-    w = WaitGame()
-    duration = 60.0
-    load_game(w)
-    return render_template('play.html')
+    global thread
+    if thread is None:
+        thread = Thread(target=background_thread)
+        thread.start()
+    return render_template('index.html')

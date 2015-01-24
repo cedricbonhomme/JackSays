@@ -82,7 +82,7 @@
     <div class="col-md-4 col-sm-8">
         <form action="login" method="POST" id="formLogin">
             {{ form.hidden_tag() }}
-            <input  name="login" style="text-align: center" type="text"
+            <input id="nickName"  name="login" style="text-align: center" type="text"
                    class="form-control btn-outline" placeholder="Nickname ...">
         </form>
     </div><!-- /.col-lg-6 -->
@@ -101,7 +101,7 @@
             <img src="../static/img/avatar/arrow_left.gif" onclick="updateTop(-1)" alt="" width="32px" height="32px">
         </div>
         <div class="col-md-4 col-xs-6" id="divMaleTop">
-            <img id="maleTop" class="img-responsive" src="../static/img/avatar/custom/top0.png" alt="" style="margin-bottom: 0">
+            <img id="maleTop" class="img-responsive" src="../static/img/avatar/custom/mtop0.png" alt="" style="margin-bottom: 0">
         </div>
         <div class="col-md-4 col-xs-1" style="text-align: left;margin-top: 3%">
             <img src="../static/img/avatar/arrow_right.gif" onclick="updateTop(1)" alt="" width="32px" height="32px">
@@ -112,7 +112,7 @@
             <img src="../static/img/avatar/arrow_left.gif" onclick="updateMiddle(-1)" alt="" width="32px" height="32px">
         </div>
         <div class="col-md-4 col-xs-6" id="divMaleMiddle" style="vertical-align: bottom">
-            <img id="maleMiddle" class="img-responsive" src="../static/img/avatar/custom/middle0.png" alt="" style="margin-bottom: 0">
+            <img id="maleMiddle" class="img-responsive" src="../static/img/avatar/custom/mmiddle0.png" alt="" style="margin-bottom: 0">
         </div>
         <div class="col-md-4 col-xs-1" style="text-align: left;margin-top: 1%">
             <img src="../static/img/avatar/arrow_right.gif" onclick="updateMiddle(1)" alt="" width="32px" height="32px">
@@ -123,7 +123,7 @@
             <img src="../static/img/avatar/arrow_left.gif" onclick="updateBottom(-1)" alt="" width="32px" height="32px">
         </div>
         <div class="col-md-4 col-xs-6" id="divMaleBottom">
-            <img id="maleBottom" class="img-responsive" src="../static/img/avatar/custom/bottom0.png" alt="" style="margin-bottom: 0">
+            <img id="maleBottom" class="img-responsive" src="../static/img/avatar/custom/mbottom0.png" alt="" style="margin-bottom: 0">
         </div>
         <div class="col-md-4 col-xs-1" style="text-align: left;margin-top: 4%">
             <img src="../static/img/avatar/arrow_right.gif" onclick="updateBottom(1)" alt="" width="32px" height="32px">
@@ -142,7 +142,7 @@
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2"></div>
     <div class="col-xs-4 col-sm-3 col-md-2">
-        <button form="formLogin" type="submit" name="submit" value="Log In" class="btn btn-outline btn-block">Start</button>
+        <button id="buttStart" form="formLogin" type="submit" name="submit" value="Log In" class="btn btn-outline btn-block">Start</button>
     </div>
 </div>
 
@@ -167,6 +167,10 @@
         middle = 1;
         bottom = 1;
         type = $.cookie('choice');
+
+        $.cookie('topImage',"../static/img/avatar/custom/"+type.charAt(0)+"top0.png");
+        $.cookie('middleImage',"../static/img/avatar/custom/"+type.charAt(0)+"middle0.png");
+        $.cookie('buttonImage',"../static/img/avatar/custom/"+type.charAt(0)+"bottom0.png");
 
         //swipe events
         $("#divFemaleTop").swipe({
@@ -204,6 +208,10 @@
         $("#buttBack").click(function (){
             window.location.href = "avatar";
         });
+        $("#buttStart").click(function (){
+            $.cookie('nic',$("#nickName").val());
+        });
+
     });
     
     function updateTop(val){
@@ -215,6 +223,7 @@
         $(id).attr('src',img);
 
         head= newHead;
+        $.cookie('topImage',img);
     }
 
     function updateMiddle(val){
@@ -226,7 +235,7 @@
         $(id).attr('src',img);
 
         middle = newMiddle;
-
+        $.cookie('middleImage',img);
     }
 
     function updateBottom(val){
@@ -238,6 +247,7 @@
         $(id).attr('src',img);
 
         bottom = newBottom;
+        $.cookie('buttonImage',img);
     }
 </script>
 
