@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from flask.ext.login import UserMixin
-
+import time
 class User(UserMixin):
     """
     Represent a user.
@@ -31,7 +31,10 @@ class Game(object):
         self.game_id = 0
         self.duration = 30.0
         self.param = None
-        
+        self.stime = time.time()
+    def get_time_left(self):
+        return time.time()-stime-1000*self.duration
+            
     def get_data(self):
         return None
 

@@ -36,8 +36,8 @@ def load_game(game):
 def get_current_game(msg):
     global current_game
     if current_game is None:
-        w = WaitGame()
-        w.duration = 60
+        w = clone(WaitGame())
+        w.duration = 100.0
         load_game(w)
     print("get game id ???")
     emit('game id',
@@ -47,7 +47,7 @@ def get_current_game(msg):
 def get_game_data(msg):
     global current_game
     emit('game data',
-         {'data': current_game.get_data(),'duration': current_game.duration})
+         {'data': current_game.get_data(),'time_left': current_game.get_time_left()})
 
 @socketio.on('nic', namespace='/test')
 def change_nic(message):
