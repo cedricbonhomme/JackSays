@@ -36,7 +36,7 @@ def authentication_required(e):
 @app.errorhandler(403)
 def authentication_failed(e):
     flash('Forbidden.', 'danger')
-    return redirect(url_for('home'))
+    return redirect(url_for('login'))
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -47,7 +47,7 @@ def internal_server_error(e):
     return render_template('errors/500.html'), 500
 
 
-def redirect_url(default='home'):
+def redirect_url(default='login'):
     return request.args.get('next') or \
             request.referrer or \
             url_for(default)
@@ -84,7 +84,7 @@ def login():
     Log in view.
     """
     if g.user is not None and g.user.is_authenticated():
-        return redirect(url_for('home'))
+        return redirect(url_for('login'))
 
     g.user = AnonymousUserMixin()
     form = SigninForm()
