@@ -15,7 +15,7 @@ class User(object):
 
 class Game(object):
     """
-    Reprensent a mini game
+    Represent a mini game
     """
     def __init__(self):
         self.user_vals = {}
