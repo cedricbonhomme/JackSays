@@ -30,6 +30,10 @@ class Game(object):
         self.user_vals = {}
         self.game_id = 0
         self.duration = 30.0
+        self.param = None
+        
+    def get_data():
+        return None
 
     def user_input(self, username, param):
         self.user[username] = param

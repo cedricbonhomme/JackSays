@@ -24,6 +24,9 @@ from flask.ext.principal import Principal, Identity, AnonymousIdentity, \
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+from games.utils import WaitGame
+from core import load_game
+
 
 #
 # Custom error pages.
@@ -51,7 +54,6 @@ def redirect_url(default='login'):
     return request.args.get('next') or \
             request.referrer or \
             url_for(default)
-
 
 
 #
@@ -100,24 +102,6 @@ def login():
         return redirect(url_for('index'))
     return render_template('customize.html', form=form)
 
-
-
-
-
-
-
-
-
-def background_thread():
-    """Example of how to send server generated events to clients."""
-    count = 0
-    while True:
-        time.sleep(10)
-        count += 1
-        socketio.emit('my response',
-                      {'data': 'Server generated event', 'count': count},
-                      namespace='/test')
-
 @app.route('/customize')
 def customize():
     form = SigninForm()
@@ -126,15 +110,10 @@ def customize():
 @app.route('/')
 def index():
     form = SigninForm()
-    global thread
-    if thread is None:
-        thread = Thread(target=background_thread)
-        thread.start()
     return render_template('index.html', user=g.user, form=form)
 @app.route('/play')
 def play():
-    global thread
-    if thread is None:
-        thread = Thread(target=background_thread)
-        thread.start()
-    return render_template('index.html')
+    w = WaitGame()
+    duration = 60.0
+    load_game(w)
+    return render_template('play.html')
