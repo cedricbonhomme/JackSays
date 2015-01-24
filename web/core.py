@@ -30,11 +30,13 @@ def unload_game():
 
 def load_game(game):
     global current_game
-    print("loading "+game.game_id)
+    
     current_game = game
     current_game.stime = time.time()
+    print("loading "+current_game.game_id,current_game.get_time_left())
     t = Timer(current_game.get_time_left(),unload_game)
     t.start()
+    socketio.emit('game id', {'id': current_game.game_id},namespace="/test")
 
 @socketio.on('get game id', namespace='/test')
 def get_current_game(msg):
@@ -44,8 +46,8 @@ def get_current_game(msg):
         w.duration = 100.0
         load_game(w)
     print("get game id ???")
-    emit('game id',
-         {'id': current_game.game_id,'param' : current_game.param})
+    #emit('game id',
+    #     {'id': current_game.game_id,'param' : current_game.param})
 
 @socketio.on('get game data', namespace='/test')
 def get_game_data(msg):
