@@ -7,9 +7,10 @@ class User(UserMixin):
     """
     Represent a user.
     """
-    def __init__(self, nic, score):
+    def __init__(self, nic, score, avatar = "M123"):
         self.nic = nic
         self.score = score
+        self.avatar = avatar
 
     def get_id(self):
         """
@@ -28,6 +29,11 @@ class Game(object):
     def __init__(self):
         self.user_vals = {}
         self.game_id = 0
+        self.duration = 30.0
+        self.param = None
+        
+    def get_data(self):
+        return None
 
     def user_input(self, username, param):
         self.user[username] = param

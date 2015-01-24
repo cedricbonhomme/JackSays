@@ -5,51 +5,32 @@
     <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
     <script type="text/javascript" charset="utf-8">
- function createCookie(name,value,days) {
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+(days*24*60*60*1000));
-		var expires = "; expires="+date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie = name+"="+value+expires+"; path=/";
-}
-
-function readCookie(name) {
-	var nameEQ = name + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0;i < ca.length;i++) {
-		var c = ca[i];
-		while (c.charAt(0)==' ') c = c.substring(1,c.length);
-		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-	}
-	return null;
-}
-
-function eraseCookie(name) {
-	createCookie(name,"",-1);
-}
 
         $(document).ready(function(){
             namespace = '/test'; // change to an empty string to use the global namespace
 
             // the socket.io documentation recommends sending an explicit package upon connection
             // this is specially important when using the global namespace
-            if (readCookie('sessionid')!==null)
-            {
-            sessionid=readCookie('sessionid');
-            eraseCookie('sessionid');
-            }
+            
             socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
             
             socket.on('connect', function() {
-                if ( 'undefined' == typeof sessionid)
-                    sessionid = socket.socket.sessionid;
-                else
-                    socket.socket.sessionid=sessionid;
-                createCookie('sessionid',sessionid,1) 
                 socket.emit('my event', {data: 'I\'m connected!'});
+                socket.emit('get game id', {});
+                console.log("invoking start");
             });
+            socket.on('game id', function(msg) {
+                console.log(msg);
+                socket.emit('my event', {data: 'I\'m connected!'});
+                var elements = $('#games').children();
+
+                for (var i = 0; i < elements.length; i++) {
+                    $(elements[i]).hide();
+                }
+                $('#'+msg.id).show();
+                socket.emit('get game data', {});
+            });
+            socket.on('game data', function(msg) {console.log(msg)});
 
             // event handler for server sent data
             // the data is displayed in the "Received" section of the page
@@ -71,12 +52,14 @@ function eraseCookie(name) {
     </script>
 </head>
 <body>
-    <div id="game">
-	<div id="game1">
-		<form id="game1" method="POST" action='#'>
-        	<input type="submit" value="Push me!">	
-	</div>
-
+    <div id="games">
+	    <div id="game1">
+		    <form id="game1" method="POST" action='#'/>
+        	    <input type="submit" value="Push me!"/>	
+        </div>
+        <div id="wait" style="background-color:red;height:100px;width:100px" >
+        
+        </div>
 
     </div>
  	

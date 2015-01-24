@@ -101,6 +101,13 @@ def login():
     return render_template('customize.html', form=form)
 
 
+
+
+
+
+
+
+
 def background_thread():
     """Example of how to send server generated events to clients."""
     count = 0

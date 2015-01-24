@@ -4,7 +4,7 @@
 from flask import session, request, g
 from flask.ext.socketio import SocketIO, emit, join_room,  \
                                 leave_room, close_room, disconnect
-                                
+
 from flask.ext.login import LoginManager, login_user, logout_user, \
                             login_required, current_user, AnonymousUserMixin                                
 
@@ -14,7 +14,40 @@ from games import *
 
 USERS = {}
 NAMESPACE = "/test"
-current_game=Game1()
+current_game = None
+from models import Game
+from games.utils import WaitGame 
+
+from threading import Timer
+
+def unload_game():
+    global current_game
+    print("finalized")
+    current_game.finalize()
+
+def load_game(game):
+    global current_game
+    print("loading "+game.game_id)
+    current_game = game
+    t = Timer(current_game.duration,unload_game)
+    t.start()
+
+@socketio.on('get game id', namespace='/test')    
+def get_current_game(msg):
+    global current_game
+    if current_game is None:
+        w = WaitGame()
+        w.duration = 60
+        load_game(w)
+    print("get game id ???")
+    emit('game id',
+         {'id': current_game.game_id,'param' : current_game.param})
+
+@socketio.on('get game data', namespace='/test')
+def get_game_data(msg):
+    global current_game
+    emit('game data',
+         {'data': current_game.get_data(),'duration': current_game.duration})
 
 @socketio.on('nic', namespace='/test')
 def change_nic(message):
@@ -84,7 +117,7 @@ def test_disconnect():
         emit('my response',
          {'data': session['user'].nic+" has left", 'count': session['receive_count']},
          broadcast=True)
-        del_user(session['user'])
+        #del_user(session['user'])
 
 
 
