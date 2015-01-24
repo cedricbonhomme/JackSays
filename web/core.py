@@ -4,7 +4,7 @@
 from flask import session, request, g
 from flask.ext.socketio import SocketIO, emit, join_room,  \
                                 leave_room, close_room, disconnect
-                                
+
 from flask.ext.login import LoginManager, login_user, logout_user, \
                             login_required, current_user, AnonymousUserMixin                                
 
@@ -21,27 +21,32 @@ from games.utils import WaitGame
 from threading import Timer
 
 def unload_game():
-    globals()["current_game"].finalize()
+    global current_game
+    current_game.finalize()
 
 def load_game(game):
+    global current_game
     print("loading "+game.game_id)
-    globals()["current_game"] = game
-    t = Timer(globals()["current_game"].duration,unload_game)
+    current_game = game
+    t = Timer(current_game.duration,unload_game)
     t.start()
+
 @socketio.on('get game id', namespace='/test')    
 def get_current_game(msg):
-    if globals()["current_game"] is None:
+    global current_game
+    if current_game is None:
         w = WaitGame()
         w.duration = 60
         load_game(w)
     print("get game id ???")
     emit('game id',
-         {'id': globals()["current_game"].game_id,'param' : globals()["current_game"].param})
-@socketio.on('get game data', namespace='/test')    
+         {'id': current_game.game_id,'param' : current_game.param})
+
+@socketio.on('get game data', namespace='/test')
 def get_game_data(msg):
+    global current_game
     emit('game data',
          {'data': current_game.get_data()})
-    
 
 @socketio.on('nic', namespace='/test')
 def change_nic(message):

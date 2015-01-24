@@ -1,9 +1,9 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from flask import flash
 from flask.ext.wtf import Form
-from flask.ext.babel import lazy_gettext
-from wtforms import TextField, TextAreaField, PasswordField, BooleanField, SubmitField, validators
-from flask.ext.wtf.html5 import EmailField
-from flask_wtf import RecaptchaField
+from wtforms import TextField, SubmitField, validators
 
 from web.models import User
 from web import USERS

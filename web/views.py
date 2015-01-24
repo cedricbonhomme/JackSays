@@ -5,7 +5,6 @@ from gevent import monkey
 monkey.patch_all()
 
 import time
-from threading import Thread
 from flask import render_template, redirect, url_for, session, request, g, flash
 from flask.ext.socketio import SocketIO, emit, join_room, leave_room, \
     close_room, disconnect
@@ -14,13 +13,9 @@ from web import app, socketio, USERS
 from form import SigninForm
 from models import User
 
-thread = None
 from flask.ext.login import LoginManager, login_user, logout_user, \
                             login_required, current_user, AnonymousUserMixin
-from flask.ext.principal import Principal, Identity, AnonymousIdentity, \
-                                identity_changed, identity_loaded, Permission,\
-                                RoleNeed, UserNeed
-
+from flask.ext.principal import Principal, Identity, AnonymousIdentity
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -59,11 +54,6 @@ def redirect_url(default='login'):
 #
 # Management of the user's session.
 #
-@identity_loaded.connect_via(app)
-def on_identity_loaded(sender, identity):
-    # Set the identity user object
-    identity.user = current_user
-
 @app.before_request
 def before_request():
     g.user = current_user
