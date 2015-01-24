@@ -6,7 +6,7 @@ from flask.ext.socketio import SocketIO, emit, join_room,  \
                                 leave_room, close_room, disconnect
 
 from flask.ext.login import LoginManager, login_user, logout_user, \
-                            login_required, current_user, AnonymousUserMixin                                
+                            login_required, current_user, AnonymousUserMixin
 
 from web import socketio
 from models import User, Game
@@ -16,7 +16,7 @@ USERS = {}
 NAMESPACE = "/test"
 current_game = None
 from models import Game
-from games.utils import WaitGame 
+from games.utils import WaitGame
 
 from threading import Timer
 
@@ -32,7 +32,7 @@ def load_game(game):
     t = Timer(current_game.duration,unload_game)
     t.start()
 
-@socketio.on('get game id', namespace='/test')    
+@socketio.on('get game id', namespace='/test')
 def get_current_game(msg):
     global current_game
     if current_game is None:
