@@ -15,7 +15,7 @@ from models import User
 
 thread = None
 
-users = []
+users = {}
 
 def background_thread():
     """Example of how to send server generated events to clients."""
@@ -27,7 +27,24 @@ def background_thread():
                       {'data': 'Server generated event', 'count': count},
                       namespace='/test')
 
-
+def add_user(user):
+    if user.nic in users:
+        return False
+    else:
+        users[user.nic]=user
+        join_room(user.nic)
+        emit('user list', {'data': ",".join([k for k in users])},broadcast=True)
+        return True
+        
+def del_user(user):
+    if user.nic not in users:
+        return False
+    else:
+        close_room(user.nic)
+        del users[user.nic]
+        emit('user list', {'data': ",".join([k for k in users])},broadcast=True)
+        return True
+    
 @app.route('/')
 def index():
     global thread
@@ -38,17 +55,11 @@ def index():
 
 @socketio.on('nic', namespace='/test')
 def change_nic(message):
-    if message['data'] in users:
-        emit('err',
-         {'data': message['data']+" is already taken!"})
-    else:
-        join_room(message['data'])
-        users.append(message['data'])
-        emit('user list',
-             {'data': ",".join(users)},
-             broadcast=True)
-        emit('my response',
-             {'data': "user changed alias - "+message['data'], 'count': session['receive_count']})
+    usr = User(message['data'],0)
+    if 'user' in session:
+        del_user(session['user'])
+    if add_user(usr):
+        session['user']=usr
 
 @socketio.on('my event', namespace='/test')
 def test_message(message):
@@ -115,9 +126,12 @@ def test_connect():
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
     print('Client disconnected')
-    emit('my response',
-         {'data': "/quit", 'count': session['receive_count']},
+    print(session)
+    if 'user' in session:
+        emit('my response',
+         {'data': session['user'].nic+" has left", 'count': session['receive_count']},
          broadcast=True)
+        del_user(session['user'])
 
 
 if __name__ == '__main__':
