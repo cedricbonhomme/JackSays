@@ -7,9 +7,11 @@ from flask.ext.socketio import SocketIO, emit, join_room, \
 
 from web import socketio
 from models import User, Game
+from games import *
 
 USERS = {}
 NAMESPACE = "/test"
+current_game=Game1()
 
 @socketio.on('nic', namespace='/test')
 def change_nic(message):
@@ -18,6 +20,11 @@ def change_nic(message):
         del_user(session['user'])
     if add_user(usr):
         session['user']=usr
+
+@socketio.on('game', namespace='/test')
+def test_message(message):
+    print session
+    #current_game.user_input(session['user'],message['data'])
 
 @socketio.on('my event', namespace='/test')
 def test_message(message):

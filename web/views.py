@@ -40,3 +40,10 @@ def index():
         thread = Thread(target=background_thread)
         thread.start()
     return render_template('index.html')
+@app.route('/play')
+def play():
+    global thread
+    if thread is None:
+        thread = Thread(target=background_thread)
+        thread.start()
+    return render_template('play.html')
