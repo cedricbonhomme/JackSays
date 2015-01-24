@@ -30,7 +30,7 @@ class Game(object):
         self.user_vals = {}
         self.game_id = 0
         self.duration = 30.0
-        self.param = None
+        self.data = None
         self.stime = time.time()
     def get_time_left(self):
         return self.duration-(time.time()-self.stime)
@@ -38,8 +38,8 @@ class Game(object):
     def get_data(self):
         return None
 
-    def user_input(self, username, param):
-        self.user[username] = param
+    def user_input(self, username, data):
+        self.user_vals[username] = data
 
     def finalize(self):
         """

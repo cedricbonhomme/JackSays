@@ -70,12 +70,21 @@
             <div id="games">
                 <div id="game1">
                     <form id="game1" method="POST" action='#'/>
-                        <input type="submit" value="Push me!"/>
+                        <input type="submit" value="Push me!"/> 
                     </form>
                 </div>
                 <div id="pickone">
-                    <button type="button" class="btn btn-default" aria-label="Left Align"></button>
-                    <button type="button" class="btn btn-primary" aria-label="Left Align"></button>
+                    <button type="button" class="btn btn-pickone" style="background:red;width:120px;height:70px"></button>
+                    <button type="button" class="btn btn-pickone" aria-label="Left Align" style="background:yellow;width:120px;height:70px"></button>
+
+                    <script type="text/javascript" charset="utf-8">
+                    $('.btn-pickone').click(function(event) {
+                        socket.emit('game', {data: "pickone"});
+                        return false;
+                    });
+
+                    </script>
+
                 </div>
                 <div id="wait" style="background-color:red;height:100px;width:100px" >
 

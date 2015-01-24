@@ -8,11 +8,10 @@ from flask.ext.socketio import SocketIO, emit, join_room,  \
 from flask.ext.login import LoginManager, login_user, logout_user, \
                             login_required, current_user, AnonymousUserMixin
 
-from web import socketio
+from web import socketio, USERS
 from models import User, Game
 from games import *
 
-USERS = {}
 NAMESPACE = "/test"
 current_game = None
 from models import Game
@@ -64,14 +63,8 @@ def change_nic(message):
         session['user']=usr
 
 @socketio.on('game', namespace='/test')
-def test_message(message):
-    print session
-    #current_game.user_input(session['user'],message['data'])
-
-@socketio.on('my event', namespace='/test')
-def test_message(message):
-    emit('my response',
-         {'data': message['data']})
+def receive_game(message):
+    current_game.user_input(current_user.nic, message)
 
 @socketio.on('my broadcast event', namespace='/test')
 def test_broadcast_message(message):

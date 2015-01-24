@@ -5,4 +5,4 @@ from utils import WaitGame
 from utils import PickOne
 
 
-game_list = [WaitGame(),PickOne()]
+game_list = [PickOne()]

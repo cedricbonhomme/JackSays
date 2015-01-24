@@ -11,10 +11,10 @@ class WaitGame (Game):
         self.game_id = "wait"
         self.start_time= time.time()
         self.duration = 60
-        self.param = None
+        self.data = None
     def get_data(self):
         return self.duration
-    def user_input(self, username, param):
+    def user_input(self, username, data):
         pass
     def finalize(self):
         pass
@@ -25,10 +25,16 @@ class PickOne (Game):
         self.game_id = "pickone"
         self.start_time= time.time()
         self.duration = 10
-        self.param = None
+        self.data = {}
+
     def get_data(self):
         return self.duration
-    def user_input(self, username, param):
-        pass
+
+    def user_input(self, username, data):
+        if username in self.data:
+            self.data[username] = time.time()
+
     def finalize(self):
-        pass
+        if self.data.items() != []:
+            result = reduce(lambda x,y: x if self.data[x]<=self.data[y] else y, self.data.iterkeys())
+            print result
