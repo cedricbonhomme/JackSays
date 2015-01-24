@@ -122,7 +122,8 @@ def background_thread():
 
 @app.route('/avatar')
 def avatar():
-    return render_template('createAvatar.html')
+    form = SigninForm()
+    return render_template('createAvatar.html', form=form)
 
 @app.route('/customize')
 def customize():

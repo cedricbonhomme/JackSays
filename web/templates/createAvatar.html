@@ -17,6 +17,25 @@
     <!-- Custom CSS -->
     <link href="../static/css/freelancer.css" rel="stylesheet">
 
+    <!-- jQuery -->
+    <script src="../static/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../static/js/classie.js"></script>
+    <script src="../static/js/cbpAnimatedHeader.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../static/js/freelancer.js"></script>
+
+    <!-- JQuery cookies -->
+    <script src="../static/js/jquery.cookie.js"></script>
+
+    <!-- swipe -->
+    <script src="../static/js/jquery.touchSwipe.js"></script>
+
 </head>
 
 <body id="page-top" class="index">
@@ -42,7 +61,7 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#portfolio">Start</a>
+                    <a href="#customize">Customize Avatar</a>
                 </li>
                 <li class="page-scroll">
                     <a href="#about">About</a>
@@ -57,7 +76,36 @@
     <!-- /.container-fluid -->
 </nav>
 
-<section>
+<header id="whatNext">
+    <div class="container">
+        <form action="login" method="POST" id="formLogin">
+            {{ form.hidden_tag() }}
+            <div class="row">
+                <div class="col-xs-1 col-sm-2 col-md-3"></div>
+                <div class="col-xs-5 col-sm-4 col-md-3">
+                    <input  name="login" style="text-align: center" type="text"
+                            class="form-control" placeholder="Nickname ...">
+                </div>
+
+                <div class="col-xs-5 col-sm-4 col-md-3" style="margin-bottom: 30px">
+                    <button id="buttBack" type="button" class="btn btn-primary btn-block">Back again ... </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="../static/img/profile.png" alt="">
+                    <div class="intro-text">
+                        <span class="name">Best Score</span>
+                        <hr class="star-light">
+                        <span class="skills">Web Developer - Graphic Artist - User Experience Designer</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</header>
+
+<section id="customize">
     <div class="container">
         <div class="row">
             <div class="col-md-4">
