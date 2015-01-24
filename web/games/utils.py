@@ -31,7 +31,7 @@ class PickOne (Game):
         return self.duration
 
     def user_input(self, username, data):
-        if username in self.data:
+        if username not in self.data:
             self.data[username] = time.time()
 
     def finalize(self):
