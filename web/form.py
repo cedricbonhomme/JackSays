@@ -3,10 +3,10 @@ from flask.ext.wtf import Form
 from flask.ext.babel import lazy_gettext
 from wtforms import TextField, TextAreaField, PasswordField, BooleanField, SubmitField, validators
 from flask.ext.wtf.html5 import EmailField
-from flask_wtf import RecaptchaField    
+from flask_wtf import RecaptchaField
 
 from web.models import User
-
+from web import USERS
 
 
 class SigninForm(Form):
@@ -23,15 +23,8 @@ class SigninForm(Form):
         if not Form.validate(self):
             return False
 
-        return True
-        #user = User.query.filter(User.email == self.email.data).first()
-        """
-        if user and user.check_password(self.password.data) and user.activation_key == "":
-            return True
-        elif user and user.activation_key != "":
-            flash('Account not confirmed', 'danger')
+        if self.login.data in USERS:
+            flash('Login already taken', 'danger')
             return False
-        else:
-            flash('Invalid email or password', 'danger')
-            #self.email.errors.append("Invalid email or password")
-            return False"""
+
+        return True
