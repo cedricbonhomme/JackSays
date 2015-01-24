@@ -22,6 +22,7 @@ from threading import Timer
 
 def unload_game():
     global current_game
+    print("finalized")
     current_game.finalize()
 
 def load_game(game):
@@ -46,7 +47,7 @@ def get_current_game(msg):
 def get_game_data(msg):
     global current_game
     emit('game data',
-         {'data': current_game.get_data()})
+         {'data': current_game.get_data(),'duration': current_game.duration})
 
 @socketio.on('nic', namespace='/test')
 def change_nic(message):

@@ -32,7 +32,7 @@ class Game(object):
         self.duration = 30.0
         self.param = None
         
-    def get_data():
+    def get_data(self):
         return None
 
     def user_input(self, username, param):
