@@ -14,4 +14,7 @@ thread = None
 
 USERS = {}
 
-from web import core, views
+from flask.ext.restful import Api
+api = Api(app)
+
+from web import core, views, rest
