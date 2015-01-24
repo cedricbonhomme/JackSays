@@ -11,6 +11,7 @@ from flask.ext.socketio import SocketIO, emit, join_room, leave_room, \
     close_room, disconnect
 
 from web import app, socketio
+from models import User
 
 thread = None
 
