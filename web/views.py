@@ -27,6 +27,7 @@ def background_thread():
                       {'data': 'Server generated event', 'count': count},
                       namespace='/test')
 
+<<<<<<< HEAD
 def add_user(user):
     if user.nic in users:
         return False
@@ -44,7 +45,16 @@ def del_user(user):
         del users[user.nic]
         emit('user list', {'data': ",".join([k for k in users])},broadcast=True)
         return True
-    
+
+
+@app.route('/avatar')
+def avatar():
+    return render_template('createAvatar.html')
+
+@app.route('/customize')
+def customize():
+    return render_template('customize.html')
+
 @app.route('/')
 def index():
     global thread
