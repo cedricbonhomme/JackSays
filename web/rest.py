@@ -24,7 +24,7 @@ class ScoreAPI(Resource):
         return jsonify(result= {
                                     "score": 10,
                                     "nic": "John",
-                                    "avatar": "m123"
+                                    "avatar": "m111"
                                 }
                         )
 api.add_resource(ScoreAPI, '/api/v1/scores', endpoint = 'scores.json')

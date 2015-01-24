@@ -87,70 +87,75 @@
         <form action="login" method="POST" id="formLogin">
             {{ form.hidden_tag() }}
             <div class="row">
-                <div class="col-xs-1 col-sm-2 col-md-3"></div>
+                <div class="col-xs-1 col-sm-1 col-md-3"></div>
                 <div class="col-xs-5 col-sm-4 col-md-3">
-                    <input  name="login" style="text-align: center" type="text" id="nickName"
-                            class="form-control" placeholder="Nickname ...">
+                    <button id="forgetMe" type="button" class="btn btn-primary">Forget Me</button>
                 </div>
-
-                <div class="col-xs-5 col-sm-4 col-md-3" style="margin-bottom: 30px">
-                    <button id="buttBack" type="button" class="btn btn-primary btn-block">Back again ... </button>
+                <div class="col-xs-6 col-sm-7 col-md-3" >
+                    <button id="buttBack" type="button" class="btn btn-primary ">Play now </button>
                 </div>
             </div>
             <div class="row">
                 <!-- known person -->
                 <div class="col-lg-12" id="knownPerson">
                     <!-- is male -->
-                    <div id="divmale" style="margin-top: 20px;margin-bottom: 20px">
+                    <div style="margin-top: 20px;margin-bottom: 20px">
                         <div class="row">
                             <div class="col-sm-3 col-md-4 col-xs-3"></div>
                             <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleTop">
-                                <img id="maleTop" class="img-responsive" src="" alt="" style="margin-bottom: 0" >
+                                <img id="divKnownTop" class="img-responsive" src="" alt="" style="margin-bottom: 0" >
                             </div>
                             <div class="col-sm-3 col-md-4 col-xs-3"></div>
                         </div>
                         <div class="row">
                             <div class="col-sm-3 col-md-4 col-xs-3"></div>
                             <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleMiddle" style="vertical-align: bottom">
-                                <img id="maleMiddle" class="img-responsive" src="" alt="" style="margin-bottom: 0" >
+                                <img id="divKnownMiddle" class="img-responsive" src="" alt="" style="margin-bottom: 0" >
                             </div>
                             <div class="col-sm-3 col-md-4 col-xs-3"></div>
                         </div>
                         <div class="row">
                             <div class="col-sm-3 col-md-4 col-xs-3"></div>
                             <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleBottom">
-                                <img id="maleBottom" class="img-responsive" src="" alt="" style="margin-bottom: 0">
+                                <img id="divKnownBottom" class="img-responsive" src="" alt="" style="margin-bottom: 0">
                             </div>
                             <div class="col-sm-6 col-md-4 col-xs-3"></div>
                         </div>
                     </div>
-                    <!-- is female -->
-                    <div id="divfemale" style="margin-top: 20px;margin-bottom: 20px">
-                        <div class="row">
-                            <div class="col-sm-3 col-md-4 col-xs-6"></div>
-                            <div class="col-md-4 col-xs-6" id="divFemaleTop">
-                                <img id="femaleTop" class="img-responsive" src="" alt="" style="margin-bottom: 0">
-                            </div>
-                            <div class="col-sm-3 col-md-4 col-xs-6"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3 col-md-4 col-xs-6"></div>
-                            <div class="col-md-4 col-xs-6" id="divFemaleMiddle" style="vertical-align: bottom">
-                                <img id="femaleMiddle" class="img-responsive" src="" alt="" style="margin-bottom: 0">
-                            </div>
-                            <div class="col-sm-3 col-md-4 col-xs-6"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3 col-md-4 col-xs-6"></div>
-                            <div class="col-md-4 col-xs-6" id="divFemaleBottom">
-                                <img id="femaleBottom" class="img-responsive" src="" alt="" style="margin-bottom: 0">
-                            </div>
-                            <div class="col-sm-3 col-md-4 col-xs-6"></div>
+                    <div class="row">
+                        <div class="intro-text">
+                            <span id="playerName" class="name"></span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="coll-lg-12">
-                            <button id="forgetMe" type="button" class="btn btn-primary">Forget Me</button>
+                </div>
+
+                <div class="col-lg-12" id="bestPerson">
+                    <div style="margin-top: 20px;margin-bottom: 20px">
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
+                            <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleTop">
+                                <img id="bestPersonTop" class="img-responsive" src="" alt="" style="margin-bottom: 0" >
+                            </div>
+                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
+                            <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleMiddle" style="vertical-align: bottom">
+                                <img id="bestPersonMiddle" class="img-responsive" src="" alt="" style="margin-bottom: 0" >
+                            </div>
+                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
+                            <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleBottom">
+                                <img id="bestPersonBottom" class="img-responsive" src="" alt="" style="margin-bottom: 0">
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-xs-3"></div>
+                        </div>
+
+                        <div class="intro-text">
+                            <span class="name">Best Score</span>
+                            <span id="bestScore" class="skills"></span>
                         </div>
                     </div>
                 </div>
@@ -159,12 +164,11 @@
                 <!-- anonymous -->
                 <div class="col-lg-12" id="anonymousAvatar">
                     <img class="img-responsive" src="../static/img/profile.png" alt="">
-                    <div class="intro-text">
-                        <span class="name">Best Score</span>
-                        <hr class="star-light">
-                        <span class="skills">Web Developer - Graphic Artist - User Experience Designer</span>
-                    </div>
+
                 </div>
+
+
+
             </div>
         </form>
     </div>
@@ -218,27 +222,75 @@
 
         $("#anonymousAvatar").hide();
         $("#knownPerson").hide();
+        $("#bestPerson").hide();
         $("#divfemale").hide();
         $("#divmale").hide();
 
         if (nic){
-            $("#nickName").val(nic);
+            $("#playerName").text(nic);
             $("#knownPerson").show();
-            //load the right div
-            $("#div"+type).show();
             //load images
-            $("#"+type+"Top").attr('src',topImage);
-            $("#"+type+"Middle").attr('src',middleImage);
-            $("#"+type+"Bottom").attr('src',buttonImage);
+            $("#divKnownTop").attr('src',topImage);
+            $("#divKnownMiddle").attr('src',middleImage);
+            $("#divKnownBottom").attr('src',buttonImage);
         }else {
-            $("#anonymousAvatar").show();
+            readBestScore();
         }
 
         $("#forgetMe").click(function(){
             $.removeCookie('nic');
             window.location.replace("/");
         });
+
     });
+
+    function readBestScore(){
+        $.getJSON( "/api/v1/scores", function( data ) {
+            var items = [];
+            $.each( data, function( key, val ) {
+                var avatar = val.avatar;
+                var nic = val.nic;
+                var score = val.score;
+                if (avatar){
+                    $("#bestScore").text(nic+"("+score+")");
+                    var imgTop,imgMiddle,imgBottom;
+                    switch(avatar.charAt(0)){
+                        case "f":imgTop = "ft";imgMiddle="fm";imgBottom="fb";break;
+                        case "m":imgTop = "mt";imgMiddle="mm";imgBottom="mb";break;
+                        case "r":imgTop = "rt";imgMiddle="rm";imgBottom="rb";break;
+                    }
+                    switch (avatar.charAt(1)){
+                        case "1":imgTop = imgTop + "1.png";break;
+                        case "2":imgTop = imgTop + "2.png";break;
+                        case "3":imgTop = imgTop + "3.png";break;
+                    }
+                    switch (avatar.charAt(2)){
+                        case "1":imgMiddle = imgMiddle + "1.png";break;
+                        case "2":imgMiddle = imgMiddle + "2.png";break;
+                        case "3":imgMiddle = imgMiddle + "3.png";break;
+                    }
+                    switch (avatar.charAt(3)){
+                        case "1":imgBottom = imgBottom + "1.png";break;
+                        case "2":imgBottom = imgBottom + "2.png";break;
+                        case "3":imgBottom = imgBottom + "3.png";break;
+                    }
+
+                    imgTop  = "../static/img/avatar/custom/" + imgTop;
+                    imgMiddle = "../static/img/avatar/custom/" + imgMiddle;
+                    imgBottom = "../static/img/avatar/custom/" + imgBottom;
+
+                    $("#bestPerson").show();
+                    $("#bestPersonTop").attr('src',imgTop);
+                    $("#bestPersonMiddle").attr('src',imgMiddle);
+                    $("#bestPersonBottom").attr('src',imgBottom);
+
+                }else{
+                    $("#anonymousAvatar").show();
+                }
+            });
+        });
+    }
+
 
     function customize(choice){
         $.cookie('choice', choice);
