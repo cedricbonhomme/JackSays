@@ -14,6 +14,7 @@ class SigninForm(Form):
     Sign in form.
     """
     login = TextField("Login", [validators.Length(min=2, max=35), validators.Required("Please enter your login.")])
+    avatar = TextField("Avatar")
     submit = SubmitField("Log In")
 
     def __init__(self, *args, **kwargs):

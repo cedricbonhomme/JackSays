@@ -83,7 +83,7 @@ def login():
     print form.login.data
 
     if form.validate_on_submit():
-        user = User(form.login.data, 0)
+        user = User(form.login.data, avatar=form.avatar.data, score=0)
         USERS[user.nic] = user
         login_user(user)
         g.user = user
@@ -101,6 +101,7 @@ def customize():
 def index():
     form = SigninForm()
     return render_template('index.html', user=g.user, form=form)
+
 @app.route('/play')
 def play():
     w = PickOne()

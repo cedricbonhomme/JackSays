@@ -84,6 +84,7 @@
             {{ form.hidden_tag() }}
             <input id="nickName"  name="login" style="text-align: center" type="text"
                    class="form-control btn-outline" placeholder="Nickname ...">
+            <input type="hidden" name="avatar" id="avatar">
         </form>
     </div><!-- /.col-lg-6 -->
     <div class="col-md-4 col-sm-2"></div>
@@ -167,6 +168,7 @@
         middle = 1;
         bottom = 1;
         type = $.cookie('choice');
+         $("#avatar").val(type.charAt(0) + "111");
 
         $.cookie('topImage',"../static/img/avatar/custom/"+type.charAt(0)+"top0.png");
         $.cookie('middleImage',"../static/img/avatar/custom/"+type.charAt(0)+"middle0.png");
@@ -224,6 +226,7 @@
 
         head= newHead;
         $.cookie('topImage',img);
+        $("#avatar").val(type.charAt(0) + head + middle + bottom);
     }
 
     function updateMiddle(val){
@@ -236,6 +239,7 @@
 
         middle = newMiddle;
         $.cookie('middleImage',img);
+        $("#avatar").val(type.charAt(0) + head + middle + bottom);
     }
 
     function updateBottom(val){
@@ -248,6 +252,7 @@
 
         bottom = newBottom;
         $.cookie('buttonImage',img);
+        $("#avatar").val(type.charAt(0) + head + middle + bottom);
     }
 </script>
 
