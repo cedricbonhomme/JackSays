@@ -17,9 +17,10 @@ USERS = {}
 from flask.ext.restful import Api
 api = Api(app)
 
+
 from web import core, views, rest
 
 from web.games.utils import WaitGame
-
 w=WaitGame()
 core.load_game(w)
+

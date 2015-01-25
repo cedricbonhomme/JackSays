@@ -23,28 +23,39 @@ import time
 
 def unload_game():
     global current_game
+    if current_game.get_time_left() >0:
+        print ("achtung achtung!")
+    send_game_message("")
     print("finalized")
-    current_game.finalize()
+    winner = current_game.finalize()
+    if winner != "":
+        send_game_message(winner + " wins!")
     load_game(copy.copy(choice(game_list)))
 
 def load_game(game):
     global current_game
-    
+    socketio.emit('countdown', {'count': "3"},namespace="/test")
+    time.sleep(1)
+    socketio.emit('countdown', {'count': "2"},namespace="/test")
+    time.sleep(1)
+    socketio.emit('countdown', {'count': "1"},namespace="/test")
+    time.sleep(1)
     current_game = game
+    current_game.__init__()
     current_game.stime = time.time()
+    send_game_message(current_game.get_data())
     print("loading "+current_game.game_id,current_game.get_time_left())
+    socketio.emit('game id', {'id': current_game.game_id, 'message': current_game.message,'start_script':current_game.start_script,'finish_script':current_game.finish_script},namespace="/test")
     t = Timer(current_game.get_time_left(),unload_game)
     t.start()
-    socketio.emit('game id', {'id': current_game.game_id},namespace="/test")
+
+def send_game_message(message):
+    socketio.emit('game message', {'data': message},namespace="/test")
 
 @socketio.on('get game id', namespace='/test')
 def get_current_game(msg):
     global current_game
-    if current_game is None:
-        w = clone(WaitGame())
-        w.duration = 100.0
-        load_game(w)
-    print("get game id ???")
+
     #emit('game id',
     #     {'id': current_game.game_id,'param' : current_game.param})
 
@@ -52,7 +63,7 @@ def get_current_game(msg):
 def get_game_data(msg):
     global current_game
     emit('game data',
-         {'data': current_game.get_data(),'time_left': current_game.get_time_left()})
+         {'data': current_game.get_data(),'start_script':current_game.start_script,'finish_script':current_game.finish_script,'message':current_game.message,'time_left': current_game.get_time_left()})
 
 @socketio.on('nic', namespace='/test')
 def change_nic(message):
