@@ -178,4 +178,31 @@ class Click(Game):
             print self.count.most_common(2)
             return self.count.most_common(1)[0][0]
         return ""
- 
+
+class TSM(Game):
+    def __init__(self):
+        super(self.__class__, self).__init__()
+        self.game_id = "tsm"
+        self.start_time= time.time()
+        self.duration = 6
+        self.data = {}
+        self.start_script = "tsmStart"
+        self.finish_script = "closeDialog"
+
+        self.number = random.randint(1, 9)
+        self.message = "Click on the number " + str(self.number)
+
+    def get_data(self):
+        #self.number = random.randint(4, 8)
+        return str(self.number)
+
+    def user_input(self, username, data):
+        if username not in self.data and int(data["button"])==self.number:
+            self.data[username] = time.time()
+        print int(data["button"])==self.number
+
+    def finalize(self):
+        if self.data.items() != []:
+            result = reduce(lambda x,y: x if self.data[x]<=self.data[y] else y, self.data.iterkeys())
+            return result
+        return ""
