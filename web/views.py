@@ -104,7 +104,7 @@ def index():
 
 @app.route('/play')
 def play():
-    w = PickOne()
-    duration = 60.0
-    load_game(w)
+    #w = PickOne()
+    #duration = 60.0
+    #load_game(w)
     return render_template('play.html')
