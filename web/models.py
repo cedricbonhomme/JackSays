@@ -46,4 +46,4 @@ class Game(object):
         """
         overload this method
         """
-        pass
+        return ""

@@ -56,11 +56,16 @@
             }
             $('#'+msg.id).show();
         });
-        
+
         socket.emit('get game data', {});
-        socket.on('game data', function(msg) {console.log(msg);});
+        socket.on('game data', function(msg) {
+            console.log(msg);
+        });
+        socket.on('game message', function(msg) {
+            $('#message').show();
+            $('#message').text(msg.data);
+        });
         //setInterval(function () {socket.emit('get game id', {})}, msg.time_left*1000+1000);
-        
 
         // event handler for server sent data
         // the data is displayed in the "Received" section of the page
@@ -104,28 +109,19 @@
             <!-- Game: Roma -->
             <div id="roma">
                 <div class="row">
-                    <div class="col-md-4"><div class="btn btn-default btn-roma">1</div>
-                    </div>
-                    <div class="col-md-4"><div class="btn btn-default btn-roma">2</div>
-                    </div>
-                    <div class="col-md-4"><div class="btn btn-default btn-roma">3</div>
-                    </div>
+                    <span><img id="8" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/8.png') }}" /></span>
+                    <span><img id="7" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/7.png') }}" /></span>
+                    <span><img id="6" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/6.png') }}" /></span>
                 </div>
                 <div class="row">
-                    <div class="col-md-4"><div class="btn btn-default btn-roma">4</div>
-                    </div>
-                    <div class="col-md-4"><div id="5" class="btn btn-default btn-roma">5</div>
-                    </div>
-                    <div class="col-md-4"><div class="btn btn-default btn-roma">6</div>
-                    </div>
+                    <span><img id="9" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/9.png') }}" /></span>
+                    <span><img id="5" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/5.png') }}" /></span>
+                    <span><img id="3" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/3.png') }}" /></span>
                 </div>
                 <div class="row">
-                    <div class="col-md-4"><div class="btn btn-default btn-roma">7</div>
-                    </div>
-                    <div class="col-md-4"><div class="btn btn-default btn-roma">8</div>
-                    </div>
-                    <div class="col-md-4"><div class="btn btn-default btn-roma">9</div>
-                    </div>
+                    <span><img id="2" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/2.png') }}" /></span>
+                    <span><img id="1" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/1.png') }}" /></span>
+                    <span><img id="4" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/4.png') }}" /></span>
                 </div>
                 <script type="text/javascript" charset="utf-8">
                 $('.btn-roma').click(function(event) {
@@ -138,14 +134,11 @@
             <div id="sound">
 
             </div>
-            <div id="wait" style="background-color:red;height:100px;width:100px" >
-
-            </div>
+            <div id="wait" style="background-color:red;height:100px;width:100px" ></div>
             </div>
         </div>
-    <div id="users">
-    </div>
-    <div id="log">
-    </div>
+        <div id="message"></div>
+        <div id="users"></div>
+        <div id="log"></div>
 </body>
 </html>

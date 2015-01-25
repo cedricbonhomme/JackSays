@@ -23,7 +23,7 @@ class WaitGame(Game):
         pass
 
     def finalize(self):
-        pass
+        return ""
 
 #
 # Games definition
@@ -56,19 +56,22 @@ class Roma(Game):
         self.duration = 10
         self.data = {}
 
-        self.number = random.randint(4, 9)
+        self.number = random.randint(4, 8)
 
     def get_data(self):
-        self.number = random.randint(4, 9)
-        return self.number
+        self.number = random.randint(4, 8)
+        return "Click on the number " + str(self.number)
 
     def user_input(self, username, data):
-        if username not in self.data and data["button"]==self.number:
+        if username not in self.data and int(data["button"])==self.number:
             self.data[username] = time.time()
+        print int(data["button"])==self.number
 
     def finalize(self):
         if self.data.items() != []:
             result = reduce(lambda x,y: x if self.data[x]<=self.data[y] else y, self.data.iterkeys())
+            return result
+        return ""
 
 class Sound(Game):
     def __init__(self):
