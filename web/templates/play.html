@@ -55,12 +55,16 @@
                 $(elements[i]).hide();
             }
 
-            $('#message').show();
-            $('#message').text(msg.message);
-            setTimeout(function() {
-                $('#message').hide();
+            if (msg.message != "") {
+                $('#message').show();
+                $('#message').text(msg.message);
+                setTimeout(function() {
+                    $('#message').hide();
+                    $('#'+msg.id).show();
+                    }, 2000);
+            } else {
                 $('#'+msg.id).show();
-                }, 2000);
+            }
         });
 
         socket.emit('get game data', {});
