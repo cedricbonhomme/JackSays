@@ -89,7 +89,7 @@ def login():
         g.user = user
         session['login'] = form.login.data
         flash("Logged in successfully.", 'success')
-        return redirect(url_for('index'))
+        return redirect(url_for('play'))
     return render_template('customize.html', form=form)
 
 @app.route('/customize')
