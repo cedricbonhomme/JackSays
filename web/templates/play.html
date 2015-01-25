@@ -152,10 +152,6 @@
                 <img class="img-click" src="{{ url_for('.static', filename = 'img/click/click.png') }}" />
                 
                 <script type="text/javascript" charset="utf-8">
-                $('.img-click').touchend(function(e) {
-                socket.emit('game', {data: "pickone"});
-                return false;
-                    });
 
                     $('.img-click').click(function(e) {
                 socket.emit('game', {data: "pickone"});
