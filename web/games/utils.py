@@ -126,3 +126,26 @@ class Scream(Game):
 
     def finalize(self):
         return random.choice(USERS.keys())
+
+from collections import Counter
+class Click(Game):
+    def __init__(self):
+        super(self.__class__, self).__init__()
+        self.game_id = "clicke"
+        self.start_time= time.time()
+        self.duration = 5
+        self.data = {}
+
+        self.count = Counter()
+
+    def get_data(self):
+        return "Click click click!"
+
+    def user_input(self, username, data):
+        self.count[username] += 1
+
+    def finalize(self):
+        if self.count.most_common() != []:
+            print self.count.most_common(2)
+            return self.count.most_common(1)[0][0]
+        return ""

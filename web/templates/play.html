@@ -148,6 +148,21 @@
             <div id="scream">
                 <img src="{{ url_for('.static', filename = 'img/scream/SCREAM.gif') }}" />
             </div>
+            <div id="clicke">
+                <img class="img-click" src="{{ url_for('.static', filename = 'img/click/click.png') }}" />
+                
+                <script type="text/javascript" charset="utf-8">
+                $('.img-click').touchend(function(e) {
+                socket.emit('game', {data: "pickone"});
+                return false;
+                    });
+
+                    $('.img-click').click(function(e) {
+                socket.emit('game', {data: "pickone"});
+                return false;
+                    });
+                    </script>
+            </div>
             <div id="wait" style="background-color:red;height:100px;width:100px" ></div>
             </div>
         </div>
