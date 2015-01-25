@@ -30,6 +30,8 @@ def unload_game():
     winner = current_game.finalize()
     if winner != "":
         send_game_message(winner + " wins!")
+    else:
+        send_game_message("nobody wins...")
     load_game(copy.copy(choice(game_list)))
 
 def load_game(game):

@@ -31,12 +31,7 @@
 	}
     
     function accelerometer_data_deamon()
-    {
-        //console.log("listen!");
-        $('#ax').text(ax);
-        $('#ay').text(ay);
-        $('#az').text(az);
-        
+    {       
         socket.emit('game', {ax:ax,ay:ay,az:az});
     }
     function accelerometer_data_deamon_start()
@@ -77,10 +72,28 @@
                 $(elements[i]).hide();
             }
             $('#countdown').show();
-            $('#countdown').text(msg.count)
+            //$('#countdown').text(msg.count)
+            if (msg.count == "3"){
+             
+                $('#countdown_3').show();
+                $('#countdown_2').hide();
+            }
+            else if(msg.count == "2")
+            {
+               
+                $('#countdown_2').show();
+                $('#countdown_3').hide();
+                
+                
+                
+            }
+                
+                
         });
         socket.on('game id', function(msg) {
             console.log(msg);
+            $('#countdown_3').attr('src',$('#countdown_3').attr('src')+'?'+new Date().getTime())
+            $('#countdown_2').attr('src',$('#countdown_2').attr('src')+'?'+new Date().getTime())
             if (post_game!="")
                     window[post_game]();
                     post_game=""
@@ -144,7 +157,10 @@
 <body>
     <div class="container">
         <div id="games">
-            <div id="countdown" style="font-size:10em;align:center;"></div>
+            <div id="countdown" style="font-size:10em;align:center;">
+            <img id="countdown_3" style="display:none;" src="{{ url_for('.static', filename = 'img/3-2.gif') }}" />
+            <img id="countdown_2" style="display:none;" src="{{ url_for('.static', filename = 'img/2-1.gif') }}" />
+            </div>
             <div id="game1">
                 <form id="game1" method="POST" action='#'/>
                     <input type="submit" value="Push me!"/>
@@ -189,7 +205,7 @@
             <!-- Game: Shake -->
             <div id="shake">
                 <img src="{{ url_for('.static', filename = 'img/shake/shake.gif') }}" />
-                ax=<span id=ax></span>, ay=<span id=ay></span>, az=<span id=az></span>,
+                
             </div>
             <!-- Game: Still -->
             <div id="still" style="font-size:10em;align:center;">
