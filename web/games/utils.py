@@ -1,12 +1,11 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+
+import time
 import random
 from web.models import Game
-import time
 
-
-
-class WaitGame (Game):
+class WaitGame(Game):
     """
     Used for waiting before the first game starts.
     """
@@ -14,20 +13,23 @@ class WaitGame (Game):
         super(self.__class__, self).__init__()
         self.game_id = "wait"
         self.start_time= time.time()
-        self.duration = 60
+        self.duration = 30
         self.data = None
+
     def get_data(self):
         return self.duration
+
     def user_input(self, username, data):
         pass
+
     def finalize(self):
         pass
 
 #
 # Games definition
 #
- 
-class PickOne (Game):
+
+class PickOne(Game):
     def __init__(self):
         super(self.__class__, self).__init__()
         self.game_id = "pickone"
@@ -46,13 +48,15 @@ class PickOne (Game):
         if self.data.items() != []:
             result = reduce(lambda x,y: x if self.data[x]<=self.data[y] else y, self.data.iterkeys())
 
-class Roma (Game):
+class Roma(Game):
     def __init__(self):
         super(self.__class__, self).__init__()
         self.game_id = "roma"
         self.start_time= time.time()
         self.duration = 10
         self.data = {}
+
+        self.number = random.randint(4, 9)
 
     def get_data(self):
         self.number = random.randint(4, 9)
@@ -66,7 +70,7 @@ class Roma (Game):
         if self.data.items() != []:
             result = reduce(lambda x,y: x if self.data[x]<=self.data[y] else y, self.data.iterkeys())
 
-class Sound (Game):
+class Sound(Game):
     def __init__(self):
         super(self.__class__, self).__init__()
         self.game_id = "sound"

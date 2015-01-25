@@ -23,28 +23,32 @@ import time
 
 def unload_game():
     global current_game
+    if current_game.get_time_left() >0:
+        print ("achtung achtung!")
     print("finalized")
     current_game.finalize()
     load_game(copy.copy(choice(game_list)))
 
 def load_game(game):
     global current_game
+    socketio.emit('countdown', {'count': "3"},namespace="/test")
+    time.sleep(1)
+    socketio.emit('countdown', {'count': "2"},namespace="/test")
+    time.sleep(1)
+    socketio.emit('countdown', {'count': "1"},namespace="/test")
+    time.sleep(1)
     current_game = game
     current_game.__init__()
     current_game.stime = time.time()
     print("loading "+current_game.game_id,current_game.get_time_left())
+    socketio.emit('game id', {'id': current_game.game_id},namespace="/test")
     t = Timer(current_game.get_time_left(),unload_game)
     t.start()
-    socketio.emit('game id', {'id': current_game.game_id},namespace="/test")
 
 @socketio.on('get game id', namespace='/test')
 def get_current_game(msg):
     global current_game
-    if current_game is None:
-        w = clone(WaitGame())
-        w.duration = 100.0
-        load_game(w)
-    print("get game id ???")
+
     #emit('game id',
     #     {'id': current_game.game_id,'param' : current_game.param})
 
