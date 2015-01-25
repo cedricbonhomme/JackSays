@@ -5,14 +5,30 @@
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/jquery-ui.min.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="../static/js/jquery.js"></script>
 
+    <!-- JQuery cookies -->
+    <script src="../static/js/jquery.cookie.js"></script>
+
+    <!-- swipe -->
+    <script src="../static/js/jquery.touchSwipe.js"></script>
+
+    <!-- raphael -->
+    <script src="../static/js/raphael-min.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="../static/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/js/jquery-ui.min.js"></script>
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/js/jqueryTimer.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
     <script type="text/javascript" charset="utf-8">
     deamonInterval =null
@@ -31,12 +47,7 @@
 	}
     
     function accelerometer_data_deamon()
-    {
-        //console.log("listen!");
-        $('#ax').text(ax);
-        $('#ay').text(ay);
-        $('#az').text(az);
-        
+    {       
         socket.emit('game', {ax:ax,ay:ay,az:az});
     }
     function accelerometer_data_deamon_start()
@@ -77,10 +88,28 @@
                 $(elements[i]).hide();
             }
             $('#countdown').show();
-            $('#countdown').text(msg.count)
+            //$('#countdown').text(msg.count)
+            if (msg.count == "3"){
+             
+                $('#countdown_3').show();
+                $('#countdown_2').hide();
+            }
+            else if(msg.count == "2")
+            {
+               
+                $('#countdown_2').show();
+                $('#countdown_3').hide();
+                
+                
+                
+            }
+                
+                
         });
         socket.on('game id', function(msg) {
             console.log(msg);
+            $('#countdown_3').attr('src',$('#countdown_3').attr('src')+'?'+new Date().getTime())
+            $('#countdown_2').attr('src',$('#countdown_2').attr('src')+'?'+new Date().getTime())
             if (post_game!="")
                     window[post_game]();
                     post_game=""
@@ -91,6 +120,8 @@
             for (var i = 0; i < elements.length; i++) {
                 $(elements[i]).hide();
             }
+
+            game_data = msg.data
 
             if (msg.message != "") {
                 $('#message').show();
@@ -144,7 +175,10 @@
 <body>
     <div class="container">
         <div id="games">
-            <div id="countdown" style="font-size:10em;align:center;"></div>
+            <div id="countdown" style="font-size:10em;align:center;">
+            <img id="countdown_3" style="display:none;" src="{{ url_for('.static', filename = 'img/3-2.gif') }}" />
+            <img id="countdown_2" style="display:none;" src="{{ url_for('.static', filename = 'img/2-1.gif') }}" />
+            </div>
             <div id="game1">
                 <form id="game1" method="POST" action='#'/>
                     <input type="submit" value="Push me!"/>
@@ -188,17 +222,16 @@
             </div>
             <!-- Game: Shake -->
             <div id="shake">
-                <img src="{{ url_for('.static', filename = 'img/shake/shake.gif') }}" />
-                ax=<span id=ax></span>, ay=<span id=ay></span>, az=<span id=az></span>,
+                <img style="max-width:100%;max-height:100%;" src="{{ url_for('.static', filename = 'img/shake/shake.gif') }}" />
             </div>
             <!-- Game: Still -->
-            <div id="still" style="font-size:10em;align:center;">
-                Stand still!
+            <div  id="still" style="font-size:10em;align:center;">
+                <img style="max-width:100%;max-height:100%;" src="{{ url_for('.static', filename = 'img/still/stand-still.gif') }}" />
                 
             </div>
             <!-- Game: Scream -->
             <div id="scream">
-                <img src="{{ url_for('.static', filename = 'img/scream/SCREAM.gif') }}" />
+                <img style="max-width:100%;max-height:100%;" src="{{ url_for('.static', filename = 'img/scream/scream.gif') }}" />
             </div>
             <div id="clicke">
                 <img class="img-click" src="{{ url_for('.static', filename = 'img/click/click.png') }}" />
@@ -212,6 +245,82 @@
                     </script>
             </div>
             <div id="wait" style="font-size:10em;align:center;" >Hang on...</div>
+            </div>
+            <!-- Game: TSM -->
+            <div id="tsm">
+                <div id="holder" class="col-lg-12"  >
+                    <div id="dialogFindIt" title="Find this in ... second (s)" onclick="closeDialog()">
+                    </div>
+                </div>
+
+                <script type="text/javascript" charset="utf-8">
+                        icons = [1,2,3,4,5,6,7,8,9];
+                        toFind = icons[parseInt(game_data)];
+                        //timeMax = 10000;
+                        animationsTypes = ["bounce","elastic","backIn","backOut"];
+
+                        function runRaphael(){
+                            var height = $(window).height();
+                            var width = $(window).width();
+                            //create raphael
+                            var paper = new Raphael(document.getElementById('holder'), width, height);
+
+                            $.map(icons,function(ico){
+                                //timer.set({ time : timeMax, autostart : true });
+
+                                var imgSrc = "../static/img/tsm/0"+ico+".png";
+                                var x = Math.floor((Math.random() * width) + 1);
+                                var y = Math.floor((Math.random() * height) + 1);
+                                var imgIco = paper.image(imgSrc, x, y, 80, 80).click(function () {
+                                    if (toFind==ico){
+                                        socket.emit('game', {data: "roma", button: this.id});
+                                    }
+                                });
+
+                                function a() {
+                                    var easing = animationsTypes[Math.floor(Math.random() * animationsTypes.length)];
+                                    var cx = Math.floor((Math.random() * 200) + 1);
+                                    var cy = Math.floor((Math.random() * 200) + 1);
+                                    var speed = Math.floor((Math.random() * 500) + 1000);
+
+                                    imgIco.transform("");
+                                    imgIco.animate({transform: "...T" + cx+", "+cy}, speed, easing,b);
+
+                                }
+                                function b() {
+                                    var easing = animationsTypes[Math.floor(Math.random() * animationsTypes.length)];
+                                    var cx = Math.floor((Math.random() * 100) + 1) * (-1);
+                                    var cy = Math.floor((Math.random() * 100) + 1) * (-1);
+                                    var speed = Math.floor((Math.random() * 1000) + 500);
+
+                                    imgIco.transform("");
+                                    imgIco.animate({transform: "...T-" + cx+", -"+cy}, speed, easing,a);
+
+                                }
+
+                                a();
+                            })
+                        }
+
+                        function closeDialog() {
+                            $( "#dialogFindIt" ).dialog( "close" );
+                            runRaphael();
+                        }
+
+                        function tsmStart() {
+                            $( "#dialogFindIt" ).dialog({
+                                modal: true,
+                                autoOpen: true,
+                                height: 270,
+                                width: 270
+                            }).on( "dialogclose", function( event, ui ) {
+                                runRaphael();
+                            } );
+
+                            $("#imgToFind").attr('src',"../static/img/tsm/0"+toFind+".png");
+                        };
+
+                </script>
             </div>
         </div>
         <div id="message" style="font-size:4em;align:center;"></div>

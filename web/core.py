@@ -30,6 +30,8 @@ def unload_game():
     winner = current_game.finalize()
     if winner != "":
         send_game_message(winner + " wins!")
+    else:
+        send_game_message("nobody wins...")
     load_game(copy.copy(choice(game_list)))
 
 def load_game(game):
@@ -45,7 +47,7 @@ def load_game(game):
     current_game.stime = time.time()
     send_game_message(current_game.get_data())
     print("loading "+current_game.game_id,current_game.get_time_left())
-    socketio.emit('game id', {'id': current_game.game_id, 'message': current_game.message,'start_script':current_game.start_script,'finish_script':current_game.finish_script},namespace="/test")
+    socketio.emit('game id', {'id': current_game.game_id, 'message': current_game.message,'start_script':current_game.start_script,'finish_script':current_game.finish_script,'data':current_game.get_data()},namespace="/test")
     t = Timer(current_game.get_time_left(),unload_game)
     t.start()
 

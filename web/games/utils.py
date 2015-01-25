@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-# -*- coding: utf-8 -*-
+# * coding: utf8 *
 
 import time
 import random
@@ -31,24 +31,36 @@ class WaitGame(Game):
 # Games definition
 #
 
-class PickOne(Game):
+class Still(Game):
     def __init__(self):
         super(self.__class__, self).__init__()
-        self.game_id = "pickone"
+        self.game_id = "still"
         self.start_time= time.time()
         self.duration = 10
         self.data = {}
+        self.message = "Get ready to..."
+        self.start_script = "accelerometer_data_deamon_start"
+        self.finish_script = "accelerometer_data_deamon_stop"
+        self.user_vals={}
 
     def get_data(self):
-        return self.duration
+        return "Get ready to..."
 
     def user_input(self, username, data):
-        if username not in self.data:
-            self.data[username] = time.time()
+        print username,data
+        if username not in self.user_vals:
+            self.user_vals[username]=0.0
+        self.user_vals[username] += abs(data['ax'])+ abs(data['ay'])+abs(data['az'])
+        return ""
 
     def finalize(self):
-        if self.data.items() != []:
-            result = reduce(lambda x,y: x if self.data[x]<=self.data[y] else y, self.data.iterkeys())
+        print self.user_vals.items()
+        if len(self.user_vals)==0:
+            return ""
+        return [k for k,v in self.user_vals.items() if min(self.user_vals.values())==v][0]
+
+        #return self.user_vals #random.choice(USERS.keys())
+
 
 class Roma(Game):
     def __init__(self):
@@ -114,7 +126,7 @@ class Shake(Game):
     def user_input(self, username, data):
         print username,data
         if username not in self.user_vals:
-            self.user_vals[username]=0.0    
+            self.user_vals[username]=0.0
         self.user_vals[username] += abs(data['ax'])+ abs(data['ay'])+abs(data['az'])
         return ""
 
@@ -125,35 +137,7 @@ class Shake(Game):
         return [k for k,v in self.user_vals.items() if max(self.user_vals.values())==v][0]
 
         #return self.user_vals #random.choice(USERS.keys())
-class Still(Game):
-    def __init__(self):
-        super(self.__class__, self).__init__()
-        self.game_id = "still"
-        self.start_time= time.time()
-        self.duration = 10
-        self.data = {}
-        self.message = "Get ready to..."
-        self.start_script = "accelerometer_data_deamon_start"
-        self.finish_script = "accelerometer_data_deamon_stop"
-        self.user_vals={}
 
-    def get_data(self):
-        return "Get ready to..."
-
-    def user_input(self, username, data):
-        print username,data
-        if username not in self.user_vals:
-            self.user_vals[username]=0.0    
-        self.user_vals[username] += abs(data['ax'])+ abs(data['ay'])+abs(data['az'])
-        return ""
-
-    def finalize(self):
-        print self.user_vals.items()
-        if len(self.user_vals)==0:
-            return ""
-        return [k for k,v in self.user_vals.items() if min(self.user_vals.values())==v][0]
-
-        #return self.user_vals #random.choice(USERS.keys())
 class Scream(Game):
     def __init__(self):
         super(self.__class__, self).__init__()
@@ -193,4 +177,32 @@ class Click(Game):
         if self.count.most_common() != []:
             print self.count.most_common(2)
             return self.count.most_common(1)[0][0]
+        return ""
+
+class TSM(Game):
+    def __init__(self):
+        super(self.__class__, self).__init__()
+        self.game_id = "tsm"
+        self.start_time= time.time()
+        self.duration = 6
+        self.data = {}
+        self.start_script = "tsmStart"
+        self.finish_script = "closeDialog"
+
+        self.number = random.randint(1, 9)
+        self.message = "Click on the number " + str(self.number)
+
+    def get_data(self):
+        #self.number = random.randint(4, 8)
+        return str(self.number)
+
+    def user_input(self, username, data):
+        if username not in self.data and int(data["button"])==self.number:
+            self.data[username] = time.time()
+        print int(data["button"])==self.number
+
+    def finalize(self):
+        if self.data.items() != []:
+            result = reduce(lambda x,y: x if self.data[x]<=self.data[y] else y, self.data.iterkeys())
+            return result
         return ""
