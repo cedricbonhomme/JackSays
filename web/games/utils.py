@@ -4,6 +4,7 @@
 import time
 import random
 from web.models import Game
+from web import USERS
 
 class WaitGame(Game):
     """
@@ -91,3 +92,20 @@ class Sound(Game):
     def finalize(self):
         if self.data.items() != []:
             result = reduce(lambda x,y: x if self.data[x]<=self.data[y] else y, self.data.iterkeys())
+
+class Shake(Game):
+    def __init__(self):
+        super(self.__class__, self).__init__()
+        self.game_id = "shake"
+        self.start_time= time.time()
+        self.duration = 10
+        self.data = {}
+
+    def get_data(self):
+        return "Let's shake!"
+
+    def user_input(self, username, data):
+        return ""
+
+    def finalize(self):
+        return random.choice(USERS.keys())
