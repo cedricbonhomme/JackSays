@@ -120,7 +120,7 @@ class Shake(Game):
 
     def finalize(self):
         print self.user_vals.items()
-        if len(self.user_vals)=0:
+        if len(self.user_vals)==0:
             return ""
         return [k for k,v in self.user_vals.items() if max(self.user_vals.values())==v][0]
 
