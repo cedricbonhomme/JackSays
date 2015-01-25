@@ -75,10 +75,10 @@ def login():
     """
     Log in view.
     """
-    if g.user is not None and g.user.is_authenticated():
-        return redirect(url_for('login'))
+    #if g.user is not None and g.user.is_authenticated():
+    #    return redirect(url_for('login'))
 
-    g.user = AnonymousUserMixin()
+    #g.user = AnonymousUserMixin()
     form = SigninForm()
     print form.login.data
 
