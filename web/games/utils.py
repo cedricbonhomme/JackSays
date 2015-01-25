@@ -53,7 +53,7 @@ class Roma(Game):
         super(self.__class__, self).__init__()
         self.game_id = "roma"
         self.start_time= time.time()
-        self.duration = 5
+        self.duration = 3
         self.data = {}
 
         self.number = random.randint(4, 8)

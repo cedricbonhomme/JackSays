@@ -85,7 +85,7 @@
         });
 
         socket.on('user list', function(msg) {
-            $('#users').text(msg.data);
+            $('#users').text("Players: " + msg.data);
         });
 })
 
@@ -144,6 +144,7 @@
             </div>
         </div>
         <div id="message" style="font-size:4em;align:center;"></div>
+        <br /><br />
         <div id="users"></div>
         <div id="log"></div>
 </body>
