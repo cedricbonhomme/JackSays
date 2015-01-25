@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="description" content="">
     <meta name="author" content="">
+
 
     <title>Freelancer - Start Bootstrap Theme</title>
 
@@ -36,47 +36,39 @@
     <!-- swipe -->
     <script src="../static/js/jquery.touchSwipe.js"></script>
 
+    <!-- ion sound -->
+    <script src="../static/js/ion.sound.min.js"></script>
+
+    <style>
+        #page-top section {
+            padding: 40px 0;
+        }
+        .imgConstom {
+            width: 28%;
+            height: 28%;
+        }
+        @media only screen and (max-width:800px) {
+            .imgConstom {
+                width: 50%;
+                height: 50%;
+            }
+        }
+    </style>
 
 </head>
 <body id="page-top" class="index">
-
-<!-- Navigation -->
-<nav class="navbar navbar-default ">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="hidden">
-                    <a href="#page-top"></a>
-                </li>
-                <li class="page-scroll">
-                    <a href="#portfolio">Start</a>
-                </li>
-                <li class="page-scroll">
-                    <a href="#about">About</a>
-                </li>
-                <li class="page-scroll">
-                    <a href="#contact">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-</nav>
-
 <div class="container">
+
+
+    <section>
+    <!-- empty div -->
+    <div id="logo" class="row">
+        <div class="col-md-12" align="center">
+            <img  class="img-responsive" src="../static/img/portfolio/logo-title.png" alt="">
+        </div>
+
+    </div>
+
     <div class="row">
     <div class="col-md-4 col-sm-2"></div>
     <div class="col-md-4 col-sm-8">
@@ -90,62 +82,62 @@
     <div class="col-md-4 col-sm-2"></div>
 </div><!-- /.row -->
 
-<!-- empty div -->
+        <div id="female">
+            <div class="row" >
+                <div class="col-md-12 col-xs-12" id="divFemaleTop" align="center">
+                    <img id="femaleTop" class="img-responsive imgConstom"
+                         src="../static/img/avatar/custom/ftop0.png" alt="" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12" id="divFemaleMiddle" align="center">
+                    <img  id="femaleMiddle" class="img-responsive imgConstom"
+                         src="../static/img/avatar/custom/fmiddle0.png" alt="" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12" id="divFemaleBottom" align="center">
+                    <img  id="femaleBottom" class="img-responsive imgConstom"
+                         src="../static/img/avatar/custom/fbottom0.png" alt="" >
+                </div>
+            </div>
+        </div>
 
-<div id="female">
+        <div id="male">
+            <div class="row" >
+                <div class="col-md-12 col-xs-12" id="divMaleTop" align="center">
+                    <img id="maleTop" class="img-responsive imgConstom"
+                         src="../static/img/avatar/custom/mtop0.png" alt="" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12" id="divMaleMiddle" align="center">
+                    <img  id="maleMiddle" class="img-responsive imgConstom"
+                          src="../static/img/avatar/custom/mmiddle0.png" alt="" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-xs-12" id="divMaleBottom" align="center">
+                    <img  id="maleBottom" class="img-responsive imgConstom"
+                          src="../static/img/avatar/custom/mbottom0.png" alt="" >
+                </div>
+            </div>
+        </div>
 
-</div>
+        <div class="row"  align="center" style="margin-top: 5px">
+            <div class="col-md-12" align="center" >
+                <img class="img-responsive" src="../static/img/portfolio/btn-validate.png" alt=""  onclick="sendForm()">
+            </div>
+            <div class="col-md-12" align="center" >
+                <img class="img-responsive" src="../static/img/portfolio/btn-back-to-menu.png" alt="" onclick="backToMenu()" >
+            </div>
+            <div class="col-md-12" align="center" style="margin-top: 1%" >
+                <img class="img-responsive" src="../static/img/portfolio/btn-credits.png" alt="">
+            </div>
+        </div>
 
-<div id="male" style="margin-top: 20px;margin-bottom: 20px">
-    <div class="row">
-        <div class="col-md-4 col-xs-3" style="text-align: right;margin-top: 3%">
-            <img src="../static/img/avatar/arrow_left.gif" onclick="updateTop(-1)" alt="" width="32px" height="32px">
-        </div>
-        <div class="col-md-4 col-xs-6" id="divMaleTop">
-            <img id="maleTop" class="img-responsive" src="../static/img/avatar/custom/mtop0.png" alt="" style="margin-bottom: 0">
-        </div>
-        <div class="col-md-4 col-xs-1" style="text-align: left;margin-top: 3%">
-            <img src="../static/img/avatar/arrow_right.gif" onclick="updateTop(1)" alt="" width="32px" height="32px">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-xs-3" style="text-align: right;margin-top: 1%">
-            <img src="../static/img/avatar/arrow_left.gif" onclick="updateMiddle(-1)" alt="" width="32px" height="32px">
-        </div>
-        <div class="col-md-4 col-xs-6" id="divMaleMiddle" style="vertical-align: bottom">
-            <img id="maleMiddle" class="img-responsive" src="../static/img/avatar/custom/mmiddle0.png" alt="" style="margin-bottom: 0">
-        </div>
-        <div class="col-md-4 col-xs-1" style="text-align: left;margin-top: 1%">
-            <img src="../static/img/avatar/arrow_right.gif" onclick="updateMiddle(1)" alt="" width="32px" height="32px">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-xs-3" style="text-align: right;margin-top: 4%">
-            <img src="../static/img/avatar/arrow_left.gif" onclick="updateBottom(-1)" alt="" width="32px" height="32px">
-        </div>
-        <div class="col-md-4 col-xs-6" id="divMaleBottom">
-            <img id="maleBottom" class="img-responsive" src="../static/img/avatar/custom/mbottom0.png" alt="" style="margin-bottom: 0">
-        </div>
-        <div class="col-md-4 col-xs-1" style="text-align: left;margin-top: 4%">
-            <img src="../static/img/avatar/arrow_right.gif" onclick="updateBottom(1)" alt="" width="32px" height="32px">
-        </div>
-    </div>
-</div>
 
-<div id="robot">
-
-</div>
-
-<div class="row">
-    <div class="col-xs-1 col-sm-2 col-md-3"></div>
-    <div class="col-xs-4 col-sm-3 col-md-2">
-        <button id="buttBack" type="button" class="btn btn-outline btn-block">Back</button>
-    </div>
-    <div class="col-xs-2 col-sm-2 col-md-2"></div>
-    <div class="col-xs-4 col-sm-3 col-md-2">
-        <button id="buttStart" form="formLogin" type="submit" name="submit" value="Log In" class="btn btn-outline btn-block">Start</button>
-    </div>
-</div>
+    </section>
 
 </div><!-- end container -->
 
@@ -155,12 +147,46 @@
     var head;
     var middle;
     var bottom;
-    
+
+    function backToMenu(){
+        window.location.href = "/gender";
+    }
+
+    function sendForm(){
+        $("#formLogin").submit();
+    }
     
     $( document ).ready(function() {
         $("#female").hide();
         $("#male").hide();
-        $("#robot").hide();
+
+        ion.sound({
+            sounds: [
+                {name: "A1",preload: true},
+                {name: "A2",preload: true},
+                {name: "A3",preload: true},
+                {name: "A4",preload: true},
+                {name: "B1",preload: true},
+                {name: "B2",preload: true},
+                {name: "B3",preload: true},
+                {name: "C1",preload: true},
+                {name: "C2",preload: true},
+                {name: "C3",preload: true},
+                {name: "D1",preload: true},
+                {name: "D2",preload: true},
+                {name: "D3",preload: true},
+                {name: "E1",preload: true},
+                {name: "E2",preload: true},
+                {name: "E3",preload: true},
+                {name: "F1",preload: true},
+                {name: "F2",preload: true},
+                {name: "F3",preload: true},
+                {name: "F4",preload: true}
+            ],
+            volume: 0.9,
+            path: "../static/sound/",
+            preload: true
+        });
 
         var toShow = "#" + $.cookie('choice');
         $(toShow).show();
@@ -208,7 +234,7 @@
 
         //buttons
         $("#buttBack").click(function (){
-            window.location.href = "avatar";
+            window.location.href = "gender";
         });
         $("#buttStart").click(function (){
             $.cookie('nic',$("#nickName").val());
@@ -224,9 +250,37 @@
         var id = "#" + type+"Top";
         $(id).attr('src',img);
 
-        head= newHead;
+
         $.cookie('topImage',img);
         $("#avatar").val(type.charAt(0) + head + middle + bottom);
+
+        //play sound
+        switch (type.charAt(0)){
+            case "m":
+                switch (newHead){
+                    case 1: ion.sound.play("A4");break
+                    case 2:
+                        if (head==3){
+                            ion.sound.play("A3");break
+                        }else {
+                            ion.sound.play("A1");break
+                        }
+                        break;
+                    case 3: ion.sound.play("A2");break
+
+                }
+                break;
+            case "f":
+                switch (newHead){
+                    case 1: ion.sound.play("D3");break;
+                    case 2: ion.sound.play("D1");break;
+                    case 3: ion.sound.play("D2");break;
+
+                }
+        }
+
+
+        head= newHead;
     }
 
     function updateMiddle(val){
@@ -240,6 +294,25 @@
         middle = newMiddle;
         $.cookie('middleImage',img);
         $("#avatar").val(type.charAt(0) + head + middle + bottom);
+
+        //play sound
+        switch (type.charAt(0)){
+            case "m":
+                switch (newMiddle){
+                    case 1: ion.sound.play("B1");break;
+                    case 2: ion.sound.play("B2");break;
+                    case 3: ion.sound.play("B3");break;
+
+                }
+                break;
+            case "f":
+                switch (newMiddle){
+                    case 1: ion.sound.play("E3");break;
+                    case 2: ion.sound.play("E1");break;
+                    case 3: ion.sound.play("E2");break;
+
+                }
+        }
     }
 
     function updateBottom(val){
@@ -250,9 +323,38 @@
         var id = "#" + type+"Bottom";
         $(id).attr('src',img);
 
-        bottom = newBottom;
+
         $.cookie('buttonImage',img);
         $("#avatar").val(type.charAt(0) + head + middle + bottom);
+
+
+        //play sound
+        switch (type.charAt(0)){
+            case "m":
+                switch (newBottom){
+                    case 1: ion.sound.play("C3");break;
+                    case 2: ion.sound.play("C1");break;
+                    case 3: ion.sound.play("C2");break;
+
+                }break;
+
+            case "f":
+                switch (newBottom){
+                    case 1: ion.sound.play("F4");break
+                    case 2:
+                        if (bottom==3){
+                            ion.sound.play("F3");break
+                        }else {
+                            ion.sound.play("F1");break
+                        }
+                        break;
+                    case 3: ion.sound.play("F2");break
+
+                }
+                break;
+        }
+
+        bottom = newBottom;
     }
 </script>
 

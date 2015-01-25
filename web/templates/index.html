@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -23,13 +23,6 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="../static/js/bootstrap.min.js"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="../static/js/classie.js"></script>
-    <script src="../static/js/cbpAnimatedHeader.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="../static/js/freelancer.js"></script>
-
     <!-- JQuery cookies -->
     <script src="../static/js/jquery.cookie.js"></script>
 
@@ -37,176 +30,106 @@
     <script src="../static/js/jquery.touchSwipe.js"></script>
 
     <style>
-        .thumbnail {
-            border: 0 none;
-            box-shadow: none;
+        #page-top section {
+            padding: 40px 0;
         }
     </style>
 </head>
 
 <body id="page-top" class="index">
 
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#page-top">SimonSays</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="hidden">
-                    <a href="#page-top"></a>
-                </li>
-                <li class="page-scroll">
-                    <a href="#customize">Customize Avatar</a>
-                </li>
-                <li class="page-scroll">
-                    <a href="#about">About</a>
-                </li>
-                <li class="page-scroll">
-                    <a href="#contact">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-</nav>
-
-<header id="whatNext">
+<section id="whatNext">
     <div class="container">
         <form action="login" method="POST" id="formLogin">
             {{ form.hidden_tag() }}
-            <div class="row">
-                <div class="col-xs-1 col-sm-1 col-md-3"></div>
-                <div class="col-xs-5 col-sm-4 col-md-3">
-                    <button id="forgetMe" type="button" class="btn btn-primary">Forget Me</button>
-                </div>
-                <div class="col-xs-6 col-sm-7 col-md-3" >
-                    <a id="buttBack" type="button" class="btn btn-primary" href="/play">Play now </a>
+            <div id="logo" class="row">
+                <div class="col-md-12" align="center">
+                    <img  class="img-responsive" src="../static/img/portfolio/logo-title.png" alt="">
                 </div>
             </div>
+
             <div class="row">
                 <!-- known person -->
-                <div class="col-lg-12" id="knownPerson">
-                    <!-- is male -->
-                    <div style="margin-top: 20px;margin-bottom: 20px">
-                        <div class="row">
-                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
-                            <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleTop">
-                                <img id="divKnownTop" class="img-responsive" src="" alt="" style="margin-bottom: 0" >
+                <div class="col-md-12" id="knownPerson">
+                    <div>
+                        <div class="row" align="center">
+                            <div class="col-md-12 col-sm-12 col-xs-12" id="divMaleTop" >
+                                <a href="gender">
+                                    <img id="divKnownTop" class="img-responsive" src=""
+                                         alt="" style="margin-bottom: 0" width="40%" height="40%">
+                                </a>
                             </div>
-                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
-                            <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleMiddle" style="vertical-align: bottom">
-                                <img id="divKnownMiddle" class="img-responsive" src="" alt="" style="margin-bottom: 0" >
+                        <div class="row" align="center">
+                            <div class="col-md-12 col-sm-12 col-xs-12" id="divMaleMiddle" style="vertical-align: bottom">
+                                <a href="gender">
+                                    <img id="divKnownMiddle" class="img-responsive"
+                                        src="" alt="" style="margin-bottom: 0" width="40%" height="40%">
+                                 </a>
                             </div>
-                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
-                            <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleBottom">
-                                <img id="divKnownBottom" class="img-responsive" src="" alt="" style="margin-bottom: 0">
+                        <div class="row" align="center">
+                            <div class="col-md-12 col-sm-12 col-xs-12" id="divMaleBottom">
+                                <a href="gender">
+                                    <img id="divKnownBottom" class="img-responsive"
+                                        src="" alt="" style="margin-bottom: 0" width="40%" height="40%">
+                                </a>
                             </div>
-                            <div class="col-sm-6 col-md-4 col-xs-3"></div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="intro-text">
-                            <span id="playerName" class="name"></span>
-                        </div>
+
                     </div>
                 </div>
 
-                <div class="col-lg-12" id="bestPerson">
-                    <div style="margin-top: 20px;margin-bottom: 20px">
-                        <div class="row">
-                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
-                            <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleTop">
-                                <img id="bestPersonTop" class="img-responsive" src="" alt="" style="margin-bottom: 0" >
+                <div class="col-md-12" id="bestPerson">
+                    <div>
+                        <div class="row" align="center">
+                            <div class="col-md-12 col-sm-12 col-xs-12" id="divMaleTop" >
+                                <a href="gender">
+                                    <img id="bestPersonTop" class="img-responsive" src=""
+                                        alt="" style="margin-bottom: 0" width="40%" height="40%">
+                                </a>
                             </div>
-                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
-                            <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleMiddle" style="vertical-align: bottom">
-                                <img id="bestPersonMiddle" class="img-responsive" src="" alt="" style="margin-bottom: 0" >
+                        <div class="row" align="center">
+                            <div class="col-md-12 col-sm-12 col-xs-12" id="divMaleMiddle" style="vertical-align: bottom">
+                                <a href="gender">
+                                    <img id="bestPersonMiddle" class="img-responsive"
+                                        src="" alt="" style="margin-bottom: 0" width="40%" height="40%">
+                                </a>
                             </div>
-                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-3 col-md-4 col-xs-3"></div>
-                            <div class="col-sm-6 col-md-4 col-xs-6" id="divMaleBottom">
-                                <img id="bestPersonBottom" class="img-responsive" src="" alt="" style="margin-bottom: 0">
+                        <div class="row" align="center">
+                            <div class="col-md-12 col-sm-12 col-xs-12" id="divMaleBottom">
+                                <a href="gender">
+                                    <img id="bestPersonBottom" class="img-responsive"
+                                        src="" alt="" style="margin-bottom: 0" width="40%" height="40%">
+                                </a>
                             </div>
-                            <div class="col-sm-6 col-md-4 col-xs-3"></div>
                         </div>
 
-                        <div class="intro-text">
-                            <span class="name">Best Score</span>
-                            <span id="bestScore" class="skills"></span>
-                        </div>
                     </div>
                 </div>
-
 
                 <!-- anonymous -->
-                <div class="col-lg-12" id="anonymousAvatar">
+                <div class="col-md-12" id="anonymousAvatar">
                     <img class="img-responsive" src="../static/img/profile.png" alt="">
-
                 </div>
-
-
-
             </div>
+
+            <!-- menu -->
+            <div class="row" style="margin-top: 5%"  align="center">
+                <div class="col-md-12" align="center" >
+                    <img class="img-responsive" src="../static/img/portfolio/btn-tap-to-play.png" alt="">
+                </div>
+                <div class="col-md-12" align="center" >
+                    <img class="img-responsive" src="../static/img/portfolio/btn-how-to-play.png" alt="">
+                </div>
+                <div class="col-md-12" align="center" style="margin-top: 1%" >
+                    <img class="img-responsive" src="../static/img/portfolio/btn-credits.png" alt="">
+                </div>
+            </div>
+
         </form>
-    </div>
-</header>
-
-<section id="customize">
-    <div class="row">
-        <div class="col-sm-12 col-md-4">
-            <div class="thumbnail">
-                <img src="../static/img/avatar/female.png" alt="">
-                <div class="caption" style="text-align: center">
-                    <h3>Women</h3>
-                    <p>It's always nice to play with women</p>
-                    <p><a onclick="customize('female')" class="btn btn-primary" role="button">Let's Go</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-4">
-            <div class="thumbnail">
-                <img src="../static/img/avatar/male.png" alt="">
-                <div class="caption" style="text-align: center">
-                    <h3>Men</h3>
-                    <p>But better with a man !!</p>
-                    <p><a onclick="customize('male')" id="customMen" class="btn btn-primary" role="button">Let's Go</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-4">
-            <div class="thumbnail">
-                <img src="../static/img/avatar/robot.png" alt="">
-                <div class="caption" style="text-align: center">
-                    <h3>Robot</h3>
-                    <p>What about machines !!</p>
-                    <p><a onclick="customize('robot')" class="btn btn-primary" role="button">Let's Go</a></p>
-                </div>
-            </div>
-        </div>
-        <p style="margin-bottom: 150px">...</p>
     </div>
 </section>
 
@@ -297,22 +220,6 @@
         window.location.href = "customize";
     }
 </script>
-
-<!-- jQuery -->
-<script src="../static/js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="../static/js/bootstrap.min.js"></script>
-
-<!-- Plugin JavaScript -->
-<script src="../static/js/classie.js"></script>
-<script src="../static/js/cbpAnimatedHeader.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="../static/js/freelancer.js"></script>
-
-<!-- JQuery cookies -->
-<script src="../static/js/jquery.cookie.js"></script>
 
 </body>
 

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SimonSays</title>
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/jquery-ui.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="../static/js/jquery.js"></script>
+
+    <!-- JQuery cookies -->
+    <script src="../static/js/jquery.cookie.js"></script>
+
+    <!-- swipe -->
+    <script src="../static/js/jquery.touchSwipe.js"></script>
+
+    <!-- raphael -->
+    <script src="../static/js/raphael-min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/js/bootstrap.min.js"></script>
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/js/jquery-ui.min.js"></script>
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/js/jqueryTimer.js"></script>
+
+</head>
+
+<body id="page-top" class="index">
+
+
+<header id="whatNext">
+    <div class="container">
+        <div class="row">
+            <div id="holder" class="col-lg-12"  >
+                <div id="dialogFindIt" title="Find this in ... second (s)">
+                    <img id="imgToFind" src="" onclick="closeDialog()"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+<script>
+
+    var icons = [1,2,3,4,5,6,7,8,9];
+    var toFind = icons[Math.floor(Math.random() * icons.length)];
+    var timeMax = 10000;
+
+    var animationsTypes = ["bounce","elastic","backIn","backOut"];
+
+    var timer = $.timer(function() {
+        alert('This message was sent by a timer.');
+    });
+
+
+
+    function runRaphael(){
+        var height = $(window).height();
+        var width = $(window).width();
+
+        //create raphael
+        var paper = new Raphael(document.getElementById('holder'), width, height);
+
+
+        $.map(icons,function(ico){
+            timer.set({ time : timeMax, autostart : true });
+
+            var imgSrc = "../static/img/tsm/0"+ico+".png";
+            var x = Math.floor((Math.random() * width) + 1);
+            var y = Math.floor((Math.random() * height) + 1);
+            var imgIco = paper.image(imgSrc, x, y, 80, 80).click(function () {
+                if (toFind==ico){
+                    alert("Get it");
+                }
+            });
+
+
+
+            function a() {
+                var easing = animationsTypes[Math.floor(Math.random() * animationsTypes.length)];
+                var cx = Math.floor((Math.random() * 200) + 1);
+                var cy = Math.floor((Math.random() * 200) + 1);
+                var speed = Math.floor((Math.random() * 500) + 1000);
+
+                imgIco.transform("");
+                imgIco.animate({transform: "...T" + cx+", "+cy}, speed, easing,b);
+
+            }
+            function b() {
+                var easing = animationsTypes[Math.floor(Math.random() * animationsTypes.length)];
+                var cx = Math.floor((Math.random() * 100) + 1) * (-1);
+                var cy = Math.floor((Math.random() * 100) + 1) * (-1);
+                var speed = Math.floor((Math.random() * 1000) + 500);
+
+                imgIco.transform("");
+                imgIco.animate({transform: "...T-" + cx+", -"+cy}, speed, easing,a);
+
+            }
+
+            a();
+        })
+
+    }
+
+    function closeDialog(){
+        $( "#dialogFindIt" ).dialog( "close" );
+        runRaphael();
+    }
+
+    $( document ).ready(function() {
+        $( "#dialogFindIt" ).dialog({
+            modal: true,
+            autoOpen: true,
+            height: 270,
+            width: 270
+        }).on( "dialogclose", function( event, ui ) {
+            runRaphael();
+        } );
+
+        $("#imgToFind").attr('src',"../static/img/tsm/0"+toFind+".png");
+    });
+//
+//        Raphael(function () {
+//        var r = Raphael("holder"), run = document.getElementById("run");
+//
+//        run.onclick = function () {
+//            //parse cities
+//            $.map(icons, function(icon){
+//
+//                r.set(imgIco);
+//
+//                var easing = animationsTypes[Math.floor(Math.random() * animationsTypes.length)];
+//                var cx = Math.floor((Math.random() * 600) + 1);
+//                var cy = Math.floor((Math.random() * 600) + 1);
+//                var speed = Math.floor((Math.random() * 1000) + 500);
+//
+//                imgIco.animate({cx:cx,cy:cy},speed);
+//            });
+//        };
+//    });
+//
+
+</script>
+
+</body>
+
+</html>
