@@ -1,7 +1,7 @@
 from web.models import Game
 
 from game1 import Game1
-from utils import WaitGame, PickOne, Roma, Shake, Scream, Click, Still
+from utils import WaitGame, Still, Roma, Shake, Scream, Click
 
 
-game_list = [Still(),Still(),Still(),Still(),Still(), Roma(), Shake(), Scream(), Click()]
+game_list = [Still(), Roma(), Shake(), Scream(), Click()]

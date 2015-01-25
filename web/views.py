@@ -19,7 +19,7 @@ from flask.ext.principal import Principal, Identity, AnonymousIdentity
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-from games.utils import WaitGame, PickOne
+from games.utils import WaitGame
 from core import load_game
 
 
