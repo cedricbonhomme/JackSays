@@ -102,7 +102,24 @@ class Shake(Game):
         self.data = {}
 
     def get_data(self):
-        return "Let's shake!"
+        return "Get ready to..."
+
+    def user_input(self, username, data):
+        return ""
+
+    def finalize(self):
+        return random.choice(USERS.keys())
+
+class Scream(Game):
+    def __init__(self):
+        super(self.__class__, self).__init__()
+        self.game_id = "scream"
+        self.start_time= time.time()
+        self.duration = 5
+        self.data = {}
+
+    def get_data(self):
+        return "Get ready to..."
 
     def user_input(self, username, data):
         return ""
