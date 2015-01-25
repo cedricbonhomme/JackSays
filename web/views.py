@@ -112,3 +112,7 @@ def play():
 @app.route('/gender')
 def gender():
     return render_template('gender.html')
+
+@app.route('/credit')
+def credit():
+    return render_template('credit.html')
