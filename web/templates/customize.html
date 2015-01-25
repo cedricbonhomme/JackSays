@@ -64,7 +64,7 @@
     <!-- empty div -->
     <div id="logo" class="row">
         <div class="col-md-12" align="center">
-            <img  class="img-responsive" src="../static/img/portfolio/logo-title.png" alt="">
+            <img  class="img-responsive" src="../static/img/logo-title-customize.png" alt="">
         </div>
 
     </div>
@@ -132,7 +132,7 @@
                 <img class="img-responsive" src="../static/img/portfolio/btn-back-to-menu.png" alt="" onclick="backToMenu()" >
             </div>
             <div class="col-md-12" align="center" style="margin-top: 1%" >
-                <img class="img-responsive" src="../static/img/portfolio/btn-credits.png" alt="">
+                <img class="img-responsive" src="../static/img/portfolio/btn-credits.png" alt="" onclick="toCredit()">
             </div>
         </div>
 
@@ -147,6 +147,10 @@
     var head;
     var middle;
     var bottom;
+
+    function toCredit(){
+        window.location.href = "/credit";
+    }
 
     function backToMenu(){
         window.location.href = "/gender";

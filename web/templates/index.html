@@ -125,7 +125,7 @@
                     <img class="img-responsive" src="../static/img/portfolio/btn-how-to-play.png" alt="">
                 </div>
                 <div class="col-md-12" align="center" style="margin-top: 1%" >
-                    <img class="img-responsive" src="../static/img/portfolio/btn-credits.png" alt="">
+                    <img class="img-responsive" src="../static/img/portfolio/btn-credits.png" alt="" onclick="toCredit()">
                 </div>
             </div>
 
@@ -214,6 +214,9 @@
         });
     }
 
+    function toCredit(){
+        window.location.href = "/credit";
+    }
 
     function customize(choice){
         $.cookie('choice', choice);
