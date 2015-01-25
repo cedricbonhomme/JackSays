@@ -66,29 +66,64 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div id="games">
-                <div id="game1">
-                    <form id="game1" method="POST" action='#'/>
-                        <input type="submit" value="Push me!"/> 
-                    </form>
+        <div id="games">
+            <div id="game1">
+                <form id="game1" method="POST" action='#'/>
+                    <input type="submit" value="Push me!"/>
+                </form>
+            </div>
+            <!-- Game: Pick One -->
+            <div id="pickone">
+                <button type="button" class="btn btn-pickone" style="background:red;width:120px;height:70px"></button>
+                <button type="button" class="btn btn-pickone" aria-label="Left Align" style="background:yellow;width:120px;height:70px"></button>
+
+                <script type="text/javascript" charset="utf-8">
+                $('.btn-pickone').click(function(event) {
+                    socket.emit('game', {data: "pickone"});
+                    return false;
+                });
+
+                </script>
+
+            </div>
+            <!-- Game: Roma -->
+            <div id="roma">
+                <div class="row">
+                    <div class="col-md-4"><div class="btn btn-default btn-roma">1</div>
+                    </div>
+                    <div class="col-md-4"><div class="btn btn-default btn-roma">2</div>
+                    </div>
+                    <div class="col-md-4"><div class="btn btn-default btn-roma">3</div>
+                    </div>
                 </div>
-                <div id="pickone">
-                    <button type="button" class="btn btn-pickone" style="background:red;width:120px;height:70px"></button>
-                    <button type="button" class="btn btn-pickone" aria-label="Left Align" style="background:yellow;width:120px;height:70px"></button>
-
-                    <script type="text/javascript" charset="utf-8">
-                    $('.btn-pickone').click(function(event) {
-                        socket.emit('game', {data: "pickone"});
-                        return false;
-                    });
-
-                    </script>
-
+                <div class="row">
+                    <div class="col-md-4"><div class="btn btn-default btn-roma">4</div>
+                    </div>
+                    <div class="col-md-4"><div id="5" class="btn btn-default btn-roma">5</div>
+                    </div>
+                    <div class="col-md-4"><div class="btn btn-default btn-roma">6</div>
+                    </div>
                 </div>
-                <div id="wait" style="background-color:red;height:100px;width:100px" >
-
+                <div class="row">
+                    <div class="col-md-4"><div class="btn btn-default btn-roma">7</div>
+                    </div>
+                    <div class="col-md-4"><div class="btn btn-default btn-roma">8</div>
+                    </div>
+                    <div class="col-md-4"><div class="btn btn-default btn-roma">9</div>
+                    </div>
                 </div>
+                <script type="text/javascript" charset="utf-8">
+                $('.btn-roma').click(function(event) {
+                    socket.emit('game', {data: "roma", button: this.id});
+                    return false;
+                });
+                </script>
+            </div>
+            <!-- Game: Sound -->
+            <div id="sound">
+
+            </div>
+            <div id="wait" style="background-color:red;height:100px;width:100px" >
 
             </div>
         </div>

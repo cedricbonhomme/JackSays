@@ -1,8 +1,7 @@
 from web.models import Game
 
 from game1 import Game1
-from utils import WaitGame
-from utils import PickOne
+from utils import WaitGame, PickOne, Roma
 
 
-game_list = [PickOne()]
+game_list = [Roma()]
