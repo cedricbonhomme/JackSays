@@ -1,3 +1,6 @@
 Flask
-flask-socketio
+Flask-SocketIO
+Flask-Restful
+Flask-WTF
+Flask-Principal
 gevent
