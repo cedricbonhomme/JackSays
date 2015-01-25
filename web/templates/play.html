@@ -202,22 +202,25 @@
             </script>
             </div>
             <!-- Game: Roma -->
-            <div id="roma" style="display:none;">
-                <div class="row">
-                    <span><img id="8" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/8.png') }}" /></span>
-                    <span><img id="7" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/7.png') }}" /></span>
-                    <span><img id="6" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/6.png') }}" /></span>
-                </div>
-                <div class="row">
-                    <span><img id="9" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/9.png') }}" /></span>
-                    <span><img id="5" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/5.png') }}" /></span>
-                    <span><img id="3" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/3.png') }}" /></span>
-                </div>
-                <div class="row">
-                    <span><img id="2" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/2.png') }}" /></span>
-                    <span><img id="1" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/1.png') }}" /></span>
-                    <span><img id="4" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/4.png') }}" /></span>
-                </div>
+            <div id="roma" style="max-width:100%;max-height:100%;" >
+                <table style="width:100%">
+                <tr>
+                
+                    <td style="width:auto"><img id="8" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/8.png') }}" /></td>
+                    <td style="width:auto"><img id="7" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/7.png') }}" /></td>
+                    <td style="width:auto"><img id="6" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/6.png') }}" /></td>
+                </tr>
+                <tr>
+                    <td style="width:auto"><img id="9" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/9.png') }}" /></td>
+                    <td style="width:auto"><img id="5" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/5.png') }}" /></td>
+                    <td style="width:auto"><img id="3" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/3.png') }}" /></td>
+                </tr>
+                <tr>
+                    <td style="width:auto"><img id="2" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/2.png') }}" /></td>
+                    <td style="width:auto"><img id="1" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/1.png') }}" /></td>
+                    <td style="width:auto"><img id="4" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/4.png') }}" /></td>
+                </tr>
+                 </table>
                 <script type="text/javascript" charset="utf-8">
                 $('.btn-roma').click(function(event) {
                     socket.emit('game', {data: "roma", button: this.id});
@@ -238,8 +241,8 @@
             <div id="scream">
                 <img style="max-width:100%;max-height:100%;" src="{{ url_for('.static', filename = 'img/scream/scream.gif') }}" />
             </div>
-            <div id="clicke">
-                <img class="img-click" src="{{ url_for('.static', filename = 'img/click/click.png') }}" />
+            <div id="clicke" style="max-width:100%;max-height:100%;" >
+                <img style="width:auto;max-width:100%;max-height:100%;"  class="img-click" src="{{ url_for('.static', filename = 'img/click/click.png') }}" />
                 
                 <script type="text/javascript" charset="utf-8">
 
