@@ -108,3 +108,7 @@ def play():
     #duration = 60.0
     #load_game(w)
     return render_template('play.html')
+
+@app.route('/gender')
+def gender():
+    return render_template('gender.html')
