@@ -16,6 +16,7 @@ class WaitGame(Game):
         self.start_time= time.time()
         self.duration = 30
         self.data = None
+        self.message = "Hang on..."
 
     def get_data(self):
         return self.duration
@@ -54,13 +55,14 @@ class Roma(Game):
         super(self.__class__, self).__init__()
         self.game_id = "roma"
         self.start_time= time.time()
-        self.duration = 4
+        self.duration = 15
         self.data = {}
-
+        
         self.number = random.randint(4, 8)
+        self.message = "Click on the number " + str(self.number)
 
     def get_data(self):
-        self.number = random.randint(4, 8)
+        #self.number = random.randint(4, 8)
         return "Click on the number " + str(self.number)
 
     def user_input(self, username, data):
@@ -81,6 +83,7 @@ class Sound(Game):
         self.start_time= time.time()
         self.duration = 10
         self.data = {}
+        self.message = ""
 
     def get_data(self):
         return self.duration
@@ -100,15 +103,28 @@ class Shake(Game):
         self.start_time= time.time()
         self.duration = 10
         self.data = {}
+        self.message = "Get ready to..."
+        self.start_script = "accelerometer_data_deamon_start"
+        self.finish_script = "accelerometer_data_deamon_stop"
+        self.user_vals={}
 
     def get_data(self):
         return "Get ready to..."
 
     def user_input(self, username, data):
+        print username,data
+        if username not in self.user_vals:
+            self.user_vals[username]=0.0    
+        self.user_vals[username] += abs(data['ax'])+ abs(data['ay'])+abs(data['az'])
         return ""
 
     def finalize(self):
-        return random.choice(USERS.keys())
+        print self.user_vals.items()
+        if len(self.user_vals)=0:
+            return ""
+        return [k for k,v in self.user_vals.items() if max(self.user_vals.values())==v][0]
+
+        #return self.user_vals #random.choice(USERS.keys())
 
 class Scream(Game):
     def __init__(self):
@@ -117,6 +133,7 @@ class Scream(Game):
         self.start_time= time.time()
         self.duration = 5
         self.data = {}
+        self.message = "Get ready to..."
 
     def get_data(self):
         return "Get ready to..."
@@ -135,7 +152,7 @@ class Click(Game):
         self.start_time= time.time()
         self.duration = 5
         self.data = {}
-
+        self.message = "Click click click!"
         self.count = Counter()
 
     def get_data(self):

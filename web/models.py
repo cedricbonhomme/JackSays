@@ -32,13 +32,16 @@ class Game(object):
         self.duration = 30.0
         self.data = None
         self.stime = time.time()
+        self.message = ""
+        self.start_script = ""
+        self.finish_script = ""
 
     def get_time_left(self):
         return self.duration-(time.time()-self.stime)
 
     def get_data(self):
         return None
-
+    
     def user_input(self, username, data):
         self.user_vals[username] = data
 

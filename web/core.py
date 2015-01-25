@@ -45,7 +45,7 @@ def load_game(game):
     current_game.stime = time.time()
     send_game_message(current_game.get_data())
     print("loading "+current_game.game_id,current_game.get_time_left())
-    socketio.emit('game id', {'id': current_game.game_id, 'message': current_game.get_data()},namespace="/test")
+    socketio.emit('game id', {'id': current_game.game_id, 'message': current_game.message,'start_script':current_game.start_script,'finish_script':current_game.finish_script},namespace="/test")
     t = Timer(current_game.get_time_left(),unload_game)
     t.start()
 
@@ -63,7 +63,7 @@ def get_current_game(msg):
 def get_game_data(msg):
     global current_game
     emit('game data',
-         {'data': current_game.get_data(),'time_left': current_game.get_time_left()})
+         {'data': current_game.get_data(),'start_script':current_game.start_script,'finish_script':current_game.finish_script,'message':current_game.message,'time_left': current_game.get_time_left()})
 
 @socketio.on('nic', namespace='/test')
 def change_nic(message):
