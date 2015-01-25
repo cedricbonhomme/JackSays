@@ -125,7 +125,35 @@ class Shake(Game):
         return [k for k,v in self.user_vals.items() if max(self.user_vals.values())==v][0]
 
         #return self.user_vals #random.choice(USERS.keys())
+class Still(Game):
+    def __init__(self):
+        super(self.__class__, self).__init__()
+        self.game_id = "still"
+        self.start_time= time.time()
+        self.duration = 10
+        self.data = {}
+        self.message = "Get ready to..."
+        self.start_script = "accelerometer_data_deamon_start"
+        self.finish_script = "accelerometer_data_deamon_stop"
+        self.user_vals={}
 
+    def get_data(self):
+        return "Get ready to..."
+
+    def user_input(self, username, data):
+        print username,data
+        if username not in self.user_vals:
+            self.user_vals[username]=0.0    
+        self.user_vals[username] += abs(data['ax'])+ abs(data['ay'])+abs(data['az'])
+        return ""
+
+    def finalize(self):
+        print self.user_vals.items()
+        if len(self.user_vals)==0:
+            return ""
+        return [k for k,v in self.user_vals.items() if min(self.user_vals.values())==v][0]
+
+        #return self.user_vals #random.choice(USERS.keys())
 class Scream(Game):
     def __init__(self):
         super(self.__class__, self).__init__()
