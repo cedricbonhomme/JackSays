@@ -154,7 +154,9 @@ class Scream(Game):
         return ""
 
     def finalize(self):
-        return random.choice(USERS.keys())
+        if USERS != {}:
+            return random.choice(USERS.keys())
+        return ""
 
 from collections import Counter
 class Click(Game):
