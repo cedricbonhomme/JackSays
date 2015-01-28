@@ -1,12 +1,13 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from flask import session, request, g
+import time
+import copy
+from flask import session, request
 from flask.ext.socketio import SocketIO, emit, join_room,  \
                                 leave_room, close_room, disconnect
 
-from flask.ext.login import LoginManager, login_user, logout_user, \
-                            login_required, current_user, AnonymousUserMixin
+from flask.ext.login import current_user
 
 from web import socketio, USERS
 from models import User, Game
@@ -18,8 +19,7 @@ from models import Game
 from games.utils import WaitGame
 from random import choice
 from threading import Timer
-import copy
-import time
+
 
 def unload_game():
     global current_game
@@ -36,36 +36,62 @@ def unload_game():
 
 def load_game(game):
     global current_game
-    socketio.emit('countdown', {'count': "3"},namespace="/test")
+    socketio.emit('countdown', {'count': "3"}, namespace="/test")
     time.sleep(1)
-    socketio.emit('countdown', {'count': "2"},namespace="/test")
+    socketio.emit('countdown', {'count': "2"}, namespace="/test")
     time.sleep(1)
-    socketio.emit('countdown', {'count': "1"},namespace="/test")
+    socketio.emit('countdown', {'count': "1"}, namespace="/test")
     time.sleep(1)
     current_game = game
     current_game.__init__()
     current_game.stime = time.time()
     send_game_message(current_game.get_data())
-    print("loading "+current_game.game_id,current_game.get_time_left())
-    socketio.emit('game id', {'id': current_game.game_id, 'message': current_game.message,'start_script':current_game.start_script,'finish_script':current_game.finish_script,'data':current_game.get_data()},namespace="/test")
+    print("loading " + current_game.game_id,current_game.get_time_left())
+    socketio.emit('game id',
+                  {'id': current_game.game_id,
+                   'message': current_game.message,
+                   'start_script':current_game.start_script,
+                   'finish_script':current_game.finish_script,
+                   'data':current_game.get_data()}, namespace="/test")
     t = Timer(current_game.get_time_left(),unload_game)
     t.start()
 
 def send_game_message(message):
     socketio.emit('game message', {'data': message},namespace="/test")
 
+def add_user(user):
+    """
+    Add a user.
+    """
+    join_room(user.nic)
+    emit('user list', {'data': ", ".join(USERS.keys())}, broadcast=True)
+    return True
+
+def del_user(user):
+    """
+    Delete a user.
+    """
+    if user not in USERS:
+        return False
+    else:
+        close_room(user)
+        del USERS[user]
+        emit('user list', {'data': ", ".join(USERS.keys())}, broadcast=True)
+        return True
+
 @socketio.on('get game id', namespace='/test')
 def get_current_game(msg):
     global current_game
-
-    #emit('game id',
-    #     {'id': current_game.game_id,'param' : current_game.param})
 
 @socketio.on('get game data', namespace='/test')
 def get_game_data(msg):
     global current_game
     emit('game data',
-         {'data': current_game.get_data(),'start_script':current_game.start_script,'finish_script':current_game.finish_script,'message':current_game.message,'time_left': current_game.get_time_left()})
+         {'data': current_game.get_data(),
+          'start_script':current_game.start_script,
+          'finish_script':current_game.finish_script,
+          'message':current_game.message,
+          'time_left': current_game.get_time_left()})
 
 @socketio.on('nic', namespace='/test')
 def change_nic(message):
@@ -124,28 +150,6 @@ def test_connect():
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
     if 'user_id' in session:
-        emit('my response', {'data': session['user_id'] + " has left"}, broadcast=True)
+        emit('my response', {'data': session['user_id'] + " has left."},
+             broadcast=True)
         del_user(session['user_id'])
-
-
-
-def add_user(user):
-    """
-    Add a user.
-    """
-    join_room(user.nic)
-    emit('user list', {'data': ",".join([k for k in USERS])},broadcast=True)
-    return True
-
-def del_user(user):
-    """
-    Delete a user.
-    """
-    if user not in USERS:
-        return False
-    else:
-        close_room(user)
-        del USERS[user]
-        emit('user list', {'data': ",".join([k for k in USERS])},broadcast=True)
-        return True
-
