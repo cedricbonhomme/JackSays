@@ -4,7 +4,6 @@
 from gevent import monkey
 monkey.patch_all()
 
-import time
 from flask import render_template, redirect, url_for, session, request, g, flash
 from flask.ext.socketio import SocketIO, emit, join_room, leave_room, \
     close_room, disconnect
@@ -14,13 +13,9 @@ from form import SigninForm
 from models import User
 
 from flask.ext.login import LoginManager, login_user, logout_user, \
-                            login_required, current_user, AnonymousUserMixin
-from flask.ext.principal import Principal, Identity, AnonymousIdentity
+                            login_required, current_user
 login_manager = LoginManager()
 login_manager.init_app(app)
-
-from games.utils import WaitGame
-from core import load_game
 
 
 #
@@ -75,10 +70,6 @@ def login():
     """
     Log in view.
     """
-    #if g.user is not None and g.user.is_authenticated():
-    #    return redirect(url_for('login'))
-
-    #g.user = AnonymousUserMixin()
     form = SigninForm()
     print form.login.data
 
@@ -104,9 +95,6 @@ def index():
 
 @app.route('/play')
 def play():
-    #w = PickOne()
-    #duration = 60.0
-    #load_game(w)
     return render_template('play.html')
 
 @app.route('/gender')

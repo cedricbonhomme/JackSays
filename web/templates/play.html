@@ -33,25 +33,25 @@
     <script type="text/javascript" charset="utf-8">
     deamonInterval =null
     alpha=0;beta=0;gamma=0
-	ax = 0; ay = 0; az=0;
+    ax = 0; ay = 0; az=0;
     window.ondevicemotion = function(e) {
-		ax = e.accelerationIncludingGravity.x;
-		ay = e.accelerationIncludingGravity.y;
-		az = e.accelerationIncludingGravity.z;
+            ax = e.accelerationIncludingGravity.x;
+            ay = e.accelerationIncludingGravity.y;
+            az = e.accelerationIncludingGravity.z;
 
-		if ( e.rotationRate ) {
-			alpha = e.rotationRate.alpha;
-			beta = e.rotationRate.beta;
-			gamma = e.rotationRate.gamma;
-		}		
-	}
-    
+            if ( e.rotationRate ) {
+                alpha = e.rotationRate.alpha;
+                beta = e.rotationRate.beta;
+                gamma = e.rotationRate.gamma;
+            }
+    }
+
     function accelerometer_data_deamon()
-    {       
+    {
         socket.emit('game', {ax:ax,ay:ay,az:az});
     }
     function accelerometer_data_deamon_start()
-    { 
+    {
         //console.log("starting deamon!");
         deamonInterval=setInterval(accelerometer_data_deamon,200)}
     function accelerometer_data_deamon_stop()
@@ -66,7 +66,7 @@
         game_data = null;
         post_game = ""
         namespace = '/test'; // change to an empty string to use the global namespace
-        
+
         // the socket.io documentation recommends sending an explicit package upon connection
         // this is specially important when using the global namespace
 
@@ -90,21 +90,15 @@
             $('#countdown').show();
             //$('#countdown').text(msg.count)
             if (msg.count == "3"){
-             
                 $('#countdown_3').show();
                 $('#countdown_2').hide();
             }
             else if(msg.count == "2")
             {
-               
                 $('#countdown_2').show();
                 $('#countdown_3').hide();
-                
-                
-                
             }
-                
-                
+
         });
         socket.on('game id', function(msg) {
             console.log(msg);
@@ -113,7 +107,7 @@
             if (post_game!="")
                     window[post_game]();
                     post_game=""
-                    
+
             socket.emit('my event', {data: 'I\'m connected!'});
             var elements = $('#games').children();
 
@@ -174,38 +168,19 @@
 </head>
 <body>
     <div class="container">
-
         <div class="row">
         <div class="col-md-12">
-
-    
+        <!-- Code of the diffent Games -->
         <div id="games">
+            <div id="wait" style="font-size:10em;align:center;" >Hang on...</div>
             <div id="countdown" style="font-size:10em;align:center;">
-            <img id="countdown_3" style="display:none;" src="{{ url_for('.static', filename = 'img/3-2.gif') }}" />
-            <img id="countdown_2" style="display:none;" src="{{ url_for('.static', filename = 'img/2-1.gif') }}" />
-            </div>
-            <div id="game1">
-                <form id="game1" method="POST" action='#'/>
-                    <input type="submit" value="Push me!"/>
-                </form>
-            </div>
-            <div id="pickone">
-                <button type="button" class="btn btn-pickone" style="background:red;width:120px;height:70px"></button>
-                <button type="button" class="btn btn-pickone" aria-label="Left Align" style="background:yellow;width:120px;height:70px"></button>
-
-            <script type="text/javascript" charset="utf-8">
-            $('.btn-pickone').click(function(event) {
-                socket.emit('game', {data: "pickone"});
-                return false;
-            });
-
-            </script>
+                <img id="countdown_3" style="display:none;" src="{{ url_for('.static', filename = 'img/3-2.gif') }}" />
+                <img id="countdown_2" style="display:none;" src="{{ url_for('.static', filename = 'img/2-1.gif') }}" />
             </div>
             <!-- Game: Roma -->
             <div id="roma" style="max-width:100%;max-height:100%;" >
                 <table style="width:100%">
                 <tr>
-                
                     <td style="width:auto"><img id="8" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/8.png') }}" /></td>
                     <td style="width:auto"><img id="7" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/7.png') }}" /></td>
                     <td style="width:auto"><img id="6" class="btn-roma" src="{{ url_for('.static', filename = 'img/roma/6.png') }}" /></td>
@@ -235,7 +210,6 @@
             <!-- Game: Still -->
             <div  id="still" style="font-size:10em;align:center;">
                 <img style="max-width:100%;max-height:100%;" src="{{ url_for('.static', filename = 'img/still/stand-still.gif') }}" />
-                
             </div>
             <!-- Game: Scream -->
             <div id="scream">
@@ -243,16 +217,13 @@
             </div>
             <div id="clicke" style="max-width:100%;max-height:100%;" >
                 <img style="width:auto;max-width:100%;max-height:100%;"  class="img-click" src="{{ url_for('.static', filename = 'img/click/click.png') }}" />
-                
                 <script type="text/javascript" charset="utf-8">
-
                     $('.img-click').click(function(e) {
-                socket.emit('game', {data: "pickone"});
-                return false;
+                        socket.emit('game', {data: "pickone"});
+                        return false;
                     });
-                    </script>
+                </script>
             </div>
-            <div id="wait" style="font-size:10em;align:center;" >Hang on...</div>
             <!-- Game: TSM -->
             <div id="tsm">
                 <div id="holder" class="col-lg-12"  >
@@ -261,7 +232,7 @@
                 </div>
 
                 <script type="text/javascript" charset="utf-8">
-                        icons = [1,2,3,4,5,6,7,8,9];
+                        icons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
                         toFind = icons[parseInt(game_data)];
                         //timeMax = 10000;
                         animationsTypes = ["bounce","elastic","backIn","backOut"];
@@ -333,12 +304,8 @@
         </div>
         <div id="message" style="font-size:4em;align:center;"></div>
         <br /><br />
-
         </div>
         </div>
-
-        
         <div id="users"></div>
-        <div id="log"></div>
 </body>
 </html>
