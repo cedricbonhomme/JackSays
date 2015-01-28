@@ -123,13 +123,9 @@ def test_connect():
 
 @socketio.on('disconnect', namespace='/test')
 def test_disconnect():
-    print('Client disconnected')
-    print(session)
-    if 'user' in session:
-        emit('my response',
-         {'data': session['user'].nic+" has left", 'count': session['receive_count']},
-         broadcast=True)
-        #del_user(session['user'])
+    if 'user_id' in session:
+        emit('my response', {'data': session['user_id'] + " has left"}, broadcast=True)
+        del_user(session['user_id'])
 
 
 
@@ -137,11 +133,6 @@ def add_user(user):
     """
     Add a user.
     """
-    #if user.nic in USERS:
-    #    return False
-    #else:
-        #USERS[user.nic]=user
-    #print(nic)
     join_room(user.nic)
     emit('user list', {'data': ",".join([k for k in USERS])},broadcast=True)
     return True
@@ -150,11 +141,11 @@ def del_user(user):
     """
     Delete a user.
     """
-    if user.nic not in USERS:
+    if user not in USERS:
         return False
     else:
-        close_room(user.nic)
-        del USERS[user.nic]
+        close_room(user)
+        del USERS[user]
         emit('user list', {'data': ",".join([k for k in USERS])},broadcast=True)
         return True
 
