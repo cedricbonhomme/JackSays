@@ -14,11 +14,14 @@ Installation
 
     $ sudo pip install --upgrade -r requirements.txt
 
-Launch
-======
+Deployment
+==========
 
 .. code:: bash
 
     $ python runserver.py
     * Running on http://127.0.0.1:5000/
     * Restarting with reloader
+
+This game can be deployed on Heroku.
+An instance is running `here <https://jack-says.herokuapp.com>`_.
