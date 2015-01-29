@@ -176,8 +176,8 @@ class Click(Game):
 
     def finalize(self):
         if self.count.most_common() != []:
-            print self.count.most_common(2)
-            #return self.count.most_common(1)[0][0]
+            #print self.count.most_common(2)
+            return self.count.most_common(1)[0][0]
         return ""
 
 class TSM(Game):
