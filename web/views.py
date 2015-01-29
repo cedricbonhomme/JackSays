@@ -71,7 +71,6 @@ def login():
     Log in view.
     """
     form = SigninForm()
-    print form.login.data
 
     if form.validate_on_submit():
         user = User(form.login.data, avatar=form.avatar.data, score=0)

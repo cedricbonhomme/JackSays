@@ -47,14 +47,13 @@ class Still(Game):
         return "Get ready to..."
 
     def user_input(self, username, data):
-        print username,data
         if username not in self.user_vals:
             self.user_vals[username]=0.0
         self.user_vals[username] += abs(data['ax'])+ abs(data['ay'])+abs(data['az'])
         return ""
 
     def finalize(self):
-        print self.user_vals.items()
+        #print self.user_vals.items()
         if len(self.user_vals)==0:
             return ""
         return [k for k,v in self.user_vals.items() if min(self.user_vals.values())==v][0]
@@ -80,7 +79,7 @@ class Roma(Game):
     def user_input(self, username, data):
         if username not in self.data and int(data["button"])==self.number:
             self.data[username] = time.time()
-        print int(data["button"])==self.number
+        #print int(data["button"])==self.number
 
     def finalize(self):
         if self.data.items() != []:
@@ -131,7 +130,7 @@ class Shake(Game):
         return ""
 
     def finalize(self):
-        print self.user_vals.items()
+        #print self.user_vals.items()
         if len(self.user_vals)==0:
             return ""
         return [k for k,v in self.user_vals.items() if max(self.user_vals.values())==v][0]
@@ -178,7 +177,7 @@ class Click(Game):
     def finalize(self):
         if self.count.most_common() != []:
             print self.count.most_common(2)
-            return self.count.most_common(1)[0][0]
+            #return self.count.most_common(1)[0][0]
         return ""
 
 class TSM(Game):
@@ -201,7 +200,7 @@ class TSM(Game):
     def user_input(self, username, data):
         if username not in self.data and int(data["button"])==self.number:
             self.data[username] = time.time()
-        print int(data["button"])==self.number
+        #print int(data["button"])==self.number
 
     def finalize(self):
         if self.data.items() != []:
