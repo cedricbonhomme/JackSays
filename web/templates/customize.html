@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,37 +7,27 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-
     <title>Jack Says</title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="../static/css/freelancer.css" rel="stylesheet">
-
     <!-- jQuery -->
     <script src="../static/js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="../static/js/bootstrap.min.js"></script>
-
     <!-- Plugin JavaScript -->
     <script src="../static/js/classie.js"></script>
     <script src="../static/js/cbpAnimatedHeader.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="../static/js/freelancer.js"></script>
-
     <!-- JQuery cookies -->
     <script src="../static/js/jquery.cookie.js"></script>
-
     <!-- swipe -->
     <script src="../static/js/jquery.touchSwipe.js"></script>
-
     <!-- ion sound -->
     <script src="../static/js/ion.sound.min.js"></script>
-
     <style>
         #page-top section {
             padding: 40px 0;
@@ -54,7 +43,6 @@
             }
         }
     </style>
-
 </head>
 <body id="page-top" class="index">
 <div class="container">
@@ -64,7 +52,7 @@
     <!-- empty div -->
     <div id="logo" class="row">
         <div class="col-md-12" align="center">
-            <img  class="img-responsive" src="../static/img/logo-title-customize.png" alt="">
+            <a href="/"><img  class="img-responsive" src="../static/img/logo-title-customize.png" alt=""></a>
         </div>
 
     </div>
@@ -157,12 +145,15 @@
     }
 
     function sendForm(){
+        $.cookie('nic', $("#nickName").val());
         $("#formLogin").submit();
     }
-    
+
     $( document ).ready(function() {
         $("#female").hide();
         $("#male").hide();
+
+        $("#nickName").val($.cookie('nic'));
 
         ion.sound({
             sounds: [
@@ -241,11 +232,11 @@
             window.location.href = "gender";
         });
         $("#buttStart").click(function (){
-            $.cookie('nic',$("#nickName").val());
+            $.cookie('nic', $("#nickName").val());
         });
 
     });
-    
+
     function updateTop(val){
         if ( (head==1 && val==-1 ) || (head==3 && val == 1) ) return;
 
@@ -282,8 +273,6 @@
 
                 }
         }
-
-
         head= newHead;
     }
 
@@ -361,8 +350,5 @@
         bottom = newBottom;
     }
 </script>
-
-
 </body>
-
 </html>

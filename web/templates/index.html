@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -13,22 +11,16 @@
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="../static/css/freelancer.css" rel="stylesheet">
-
     <!-- jQuery -->
     <script src="../static/js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="../static/js/bootstrap.min.js"></script>
-
     <!-- JQuery cookies -->
     <script src="../static/js/jquery.cookie.js"></script>
-
     <!-- swipe -->
     <script src="../static/js/jquery.touchSwipe.js"></script>
-
     <style>
         #page-top section {
             padding: 40px 0;
@@ -44,88 +36,55 @@
             {{ form.hidden_tag() }}
             <div id="logo" class="row">
                 <div class="col-md-12" align="center">
-                    <img  class="img-responsive" src="../static/img/portfolio/logo-title.png" alt="">
+                    <a href="/"><img  class="img-responsive" src="../static/img/portfolio/logo-title.png" alt=""></a>
                 </div>
             </div>
 
             <div class="row">
                 <!-- known person -->
-                <div class="col-md-12" id="knownPerson">
-                    <div>
+                <div class="col-md-12">
+                    <div id="knownPerson">
                         <div class="row" align="center">
                             <div class="col-md-12 col-sm-12 col-xs-12" id="divMaleTop" >
                                 <a href="gender">
-                                    <img id="divKnownTop" class="img-responsive" src=""
-                                         alt="" style="margin-bottom: 0" width="40%" height="40%">
+                                    <img id="divKnownTop" class="img-responsive" src="" title="Change your avatar" style="margin-bottom: 0" width="40%" height="40%">
                                 </a>
                             </div>
                         </div>
                         <div class="row" align="center">
                             <div class="col-md-12 col-sm-12 col-xs-12" id="divMaleMiddle" style="vertical-align: bottom">
                                 <a href="gender">
-                                    <img id="divKnownMiddle" class="img-responsive"
-                                        src="" alt="" style="margin-bottom: 0" width="40%" height="40%">
+                                    <img id="divKnownMiddle" class="img-responsive" src="" title="Change your avatar" style="margin-bottom: 0" width="40%" height="40%">
                                  </a>
                             </div>
                         </div>
                         <div class="row" align="center">
                             <div class="col-md-12 col-sm-12 col-xs-12" id="divMaleBottom">
                                 <a href="gender">
-                                    <img id="divKnownBottom" class="img-responsive"
-                                        src="" alt="" style="margin-bottom: 0" width="40%" height="40%">
+                                    <img id="divKnownBottom" class="img-responsive" src="" title="Change your avatar" style="margin-bottom: 0" width="40%" height="40%">
                                 </a>
                             </div>
+                            <b><div id="playerName"></div></b>
                         </div>
-
                     </div>
-                </div>
 
-                <div class="col-md-12" id="bestPerson">
-                    <div>
-                        <div class="row" align="center">
-                            <div class="col-md-12 col-sm-12 col-xs-12" id="divMaleTop" >
-                                <a href="gender">
-                                    <img id="bestPersonTop" class="img-responsive" src=""
-                                        alt="" style="margin-bottom: 0" width="40%" height="40%">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row" align="center">
-                            <div class="col-md-12 col-sm-12 col-xs-12" id="divMaleMiddle" style="vertical-align: bottom">
-                                <a href="gender">
-                                    <img id="bestPersonMiddle" class="img-responsive"
-                                        src="" alt="" style="margin-bottom: 0" width="40%" height="40%">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row" align="center">
-                            <div class="col-md-12 col-sm-12 col-xs-12" id="divMaleBottom">
-                                <a href="gender">
-                                    <img id="bestPersonBottom" class="img-responsive"
-                                        src="" alt="" style="margin-bottom: 0" width="40%" height="40%">
-                                </a>
-                            </div>
-                        </div>
-
+                    <!-- anonymous -->
+                    <div id="anonymousAvatar">
+                        <a href="/gender"><img class="img-responsive" src="../static/img/profile.png" alt=""></a>
                     </div>
-                </div>
-
-                <!-- anonymous -->
-                <div class="col-md-12" id="anonymousAvatar">
-                    <img class="img-responsive" src="../static/img/profile.png" alt="">
                 </div>
             </div>
 
             <!-- menu -->
             <div class="row" style="margin-top: 5%"  align="center">
                 <div class="col-md-12" align="center" >
-                    <img class="img-responsive" src="../static/img/portfolio/btn-tap-to-play.png" alt="">
+                    <a href="/customize"><img class="img-responsive" src="../static/img/portfolio/btn-tap-to-play.png" alt=""></a>
                 </div>
                 <div class="col-md-12" align="center" >
                     <img class="img-responsive" src="../static/img/portfolio/btn-how-to-play.png" alt="">
                 </div>
                 <div class="col-md-12" align="center" style="margin-top: 1%" >
-                    <img class="img-responsive" src="../static/img/portfolio/btn-credits.png" alt="" onclick="toCredit()">
+                    <a href="/credit"><img class="img-responsive" src="../static/img/portfolio/btn-credits.png" alt=""></a>
                 </div>
             </div>
 
@@ -142,7 +101,6 @@
         var middleImage = $.cookie('middleImage');
         var buttonImage = $.cookie('buttonImage');
 
-
         $("#anonymousAvatar").hide();
         $("#knownPerson").hide();
         $("#bestPerson").hide();
@@ -151,13 +109,14 @@
 
         if (nic){
             $("#playerName").text(nic);
+            $("#playerName").show();
             $("#knownPerson").show();
             //load images
-            $("#divKnownTop").attr('src',topImage);
-            $("#divKnownMiddle").attr('src',middleImage);
-            $("#divKnownBottom").attr('src',buttonImage);
+            $("#divKnownTop").attr('src', topImage);
+            $("#divKnownMiddle").attr('src', middleImage);
+            $("#divKnownBottom").attr('src', buttonImage);
         }else {
-            readBestScore();
+            $("#anonymousAvatar").show();
         }
 
         $("#forgetMe").click(function(){
@@ -166,64 +125,6 @@
         });
 
     });
-
-    function readBestScore(){
-        $.getJSON( "/api/v1/scores", function( data ) {
-            var items = [];
-            $.each( data, function( key, val ) {
-                var avatar = val.avatar;
-                var nic = val.nic;
-                var score = val.score;
-                if (avatar){
-                    $("#bestScore").text(nic+"("+score+")");
-                    var imgTop,imgMiddle,imgBottom;
-                    switch(avatar.charAt(0)){
-                        case "f":imgTop = "ft";imgMiddle="fm";imgBottom="fb";break;
-                        case "m":imgTop = "mt";imgMiddle="mm";imgBottom="mb";break;
-                        case "r":imgTop = "rt";imgMiddle="rm";imgBottom="rb";break;
-                    }
-                    switch (avatar.charAt(1)){
-                        case "1":imgTop = imgTop + "1.png";break;
-                        case "2":imgTop = imgTop + "2.png";break;
-                        case "3":imgTop = imgTop + "3.png";break;
-                    }
-                    switch (avatar.charAt(2)){
-                        case "1":imgMiddle = imgMiddle + "1.png";break;
-                        case "2":imgMiddle = imgMiddle + "2.png";break;
-                        case "3":imgMiddle = imgMiddle + "3.png";break;
-                    }
-                    switch (avatar.charAt(3)){
-                        case "1":imgBottom = imgBottom + "1.png";break;
-                        case "2":imgBottom = imgBottom + "2.png";break;
-                        case "3":imgBottom = imgBottom + "3.png";break;
-                    }
-
-                    imgTop  = "../static/img/avatar/custom/" + imgTop;
-                    imgMiddle = "../static/img/avatar/custom/" + imgMiddle;
-                    imgBottom = "../static/img/avatar/custom/" + imgBottom;
-
-                    $("#bestPerson").show();
-                    $("#bestPersonTop").attr('src',imgTop);
-                    $("#bestPersonMiddle").attr('src',imgMiddle);
-                    $("#bestPersonBottom").attr('src',imgBottom);
-
-                }else{
-                    $("#anonymousAvatar").show();
-                }
-            });
-        });
-    }
-
-    function toCredit(){
-        window.location.href = "/credit";
-    }
-
-    function customize(choice){
-        $.cookie('choice', choice);
-        window.location.href = "customize";
-    }
 </script>
-
 </body>
-
 </html>
