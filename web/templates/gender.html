@@ -1,36 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Jack Says</title>
-
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
-
-    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="../static/css/freelancer.css" rel="stylesheet">
-    <!-- jQuery -->
-    <script src="../static/js/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../static/js/bootstrap.min.js"></script>
-    <!-- JQuery cookies -->
-    <script src="../static/js/jquery.cookie.js"></script>
-    <!-- swipe -->
-    <script src="../static/js/jquery.touchSwipe.js"></script>
-    <style>
-            #page-top section {
-                padding: 40px 0;
-            }
-    </style>
-</head>
-<body id="page-top" class="index">
-
+{% extends "layout.html" %}
+{% block content %}
 <section id="whatNext">
     <div class="container">
         <form action="login" method="POST" id="formLogin">
@@ -82,5 +51,4 @@
         window.location.href = "/credit";
     }
 </script>
-</body>
-</html>
+{% endblock %}
