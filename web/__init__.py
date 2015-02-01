@@ -14,11 +14,7 @@ thread = None
 
 USERS = {}
 
-from flask.ext.restful import Api
-api = Api(app)
-
-
-from web import core, views, rest
+from web import core, views
 
 from web.games.utils import WaitGame
 w=WaitGame()

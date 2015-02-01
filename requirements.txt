@@ -1,6 +1,5 @@
 Flask
 Flask-SocketIO
-Flask-Restful
 Flask-WTF
 Flask-Login
 gevent
