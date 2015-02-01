@@ -25,3 +25,9 @@ Deployment
 
 This game can be deployed on Heroku.
 An instance is running `here <https://jack-says.herokuapp.com>`_.
+
+License
+=======
+
+`Jack Says <https://github.com/cedricbonhomme/JackSays>`_
+is under the `GNU Affero General Public License version 3 <https://www.gnu.org/licenses/agpl-3.0.html>`_.
