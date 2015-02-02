@@ -6,7 +6,6 @@ import copy
 from flask import session, request
 from flask.ext.socketio import SocketIO, emit, join_room,  \
                                 leave_room, close_room, disconnect
-
 from flask.ext.login import current_user
 
 from web import socketio, USERS
