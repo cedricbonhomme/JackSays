@@ -1,17 +1,15 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from gevent import monkey
-monkey.patch_all()
-
-from flask import render_template, redirect, url_for, session, request, g, flash
+from flask import render_template, redirect, url_for, session, request, \
+                    g, flash
+from flask.ext.login import LoginManager, login_user, login_required, \
+                            current_user
 
 from web import app, USERS
 from form import SigninForm
 from models import User
 
-from flask.ext.login import LoginManager, login_user, login_required, \
-                            current_user
 login_manager = LoginManager()
 login_manager.init_app(app)
 
