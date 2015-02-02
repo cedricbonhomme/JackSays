@@ -1,6 +1,9 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from gevent import monkey
+monkey.patch_all()
+
 from flask import render_template, redirect, url_for, session, request, \
                     g, flash
 from flask.ext.login import LoginManager, login_user, login_required, \
@@ -10,8 +13,10 @@ from web import app, USERS
 from form import SigninForm
 from models import User
 
+
 login_manager = LoginManager()
 login_manager.init_app(app)
+
 
 #
 # Custom error pages.
@@ -39,6 +44,7 @@ def redirect_url(default='index'):
     return request.args.get('next') or \
             request.referrer or \
             url_for(default)
+
 
 #
 # Management of the user's session.
