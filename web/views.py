@@ -5,15 +5,13 @@ from gevent import monkey
 monkey.patch_all()
 
 from flask import render_template, redirect, url_for, session, request, g, flash
-from flask.ext.socketio import SocketIO, emit, join_room, leave_room, \
-    close_room, disconnect
 
-from web import app, socketio, USERS
+from web import app, USERS
 from form import SigninForm
 from models import User
 
-from flask.ext.login import LoginManager, login_user, logout_user, \
-                            login_required, current_user
+from flask.ext.login import LoginManager, login_user, login_required, \
+                            current_user
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -93,6 +91,7 @@ def index():
     return render_template('index.html', user=g.user, form=form)
 
 @app.route('/play')
+@login_required
 def play():
     return render_template('play.html')
 
