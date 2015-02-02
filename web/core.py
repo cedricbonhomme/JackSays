@@ -21,8 +21,11 @@ from threading import Timer
 
 
 def unload_game():
+    """
+    Gracefully end a game.
+    """
     global current_game
-    if current_game.get_time_left() >0:
+    if current_game.get_time_left() > 0:
         print ("achtung achtung!")
     send_game_message("")
     print("finalized")
@@ -34,6 +37,9 @@ def unload_game():
     load_game(copy.copy(choice(game_list)))
 
 def load_game(game):
+    """
+    Loads a new game.
+    """
     global current_game
     socketio.emit('countdown', {'count': "3"}, namespace="/test")
     time.sleep(1)
@@ -52,7 +58,7 @@ def load_game(game):
                    'start_script':current_game.start_script,
                    'finish_script':current_game.finish_script,
                    'data':current_game.get_data()}, namespace="/test")
-    t = Timer(current_game.get_time_left(),unload_game)
+    t = Timer(current_game.get_time_left(), unload_game)
     t.start()
 
 def send_game_message(message):

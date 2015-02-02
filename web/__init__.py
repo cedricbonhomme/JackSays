@@ -18,4 +18,3 @@ from web import core, views
 from web.games.utils import WaitGame
 w=WaitGame()
 core.load_game(w)
-

@@ -1,8 +1,9 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from flask.ext.login import UserMixin
 import time
+from flask.ext.login import UserMixin
+
 class User(UserMixin):
     """
     Represent a user.
@@ -17,7 +18,7 @@ class User(UserMixin):
         Return the id of the user.
         """
         return self.nic
-        
+
     def dump(self):
         return {"nic": self.nic,
                 "score": self.score}
@@ -41,7 +42,7 @@ class Game(object):
 
     def get_data(self):
         return None
-    
+
     def user_input(self, username, data):
         self.user_vals[username] = data
 
