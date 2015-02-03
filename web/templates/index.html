@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
 {% block content %}
-<section id="whatNext">
     <div class="container">
         <form  method="POST" id="formLogin">
             {{ form.hidden_tag() }}
@@ -60,7 +59,6 @@
 
         </form>
     </div>
-</section>
 <script>
     $( document ).ready(function() {
         var nic = $.cookie('nic');

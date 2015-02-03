@@ -48,7 +48,21 @@
 {% endblock %}
 <body id="page-top" class="index">
 
-{% block content %}{% endblock %}
+<section id="whatNext">
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="container">
+        {% for category, message in messages %}
+            <div class="alert alert-{{category}}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endwith %}
 
+{% block content %}{% endblock %}
+</section>
 </body>
 </html>

@@ -13,7 +13,7 @@ class SigninForm(Form):
     """
     Sign in form.
     """
-    login = TextField("Login", [validators.Length(min=2, max=35), validators.Required("Please enter your login.")])
+    login = TextField("Login", [validators.Length(min=2, max=35), validators.Required("Please enter your nickname.")])
     avatar = TextField("Avatar")
     submit = SubmitField("Log In")
 
@@ -25,7 +25,7 @@ class SigninForm(Form):
             return False
 
         if self.login.data in USERS:
-            flash('Login already taken', 'danger')
+            flash('Nickname already taken', 'danger')
             return False
 
         return True
