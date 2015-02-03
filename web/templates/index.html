@@ -1,18 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="container">
+        <div id="logo" class="row">
+            <div class="col-md-12" align="center">
+                <a href="/"><img  class="img-responsive" src="../static/img/portfolio/logo-title.png" alt="" /></a>
+            </div>
+        </div>
         <form  method="POST" id="formLogin">
             {{ form.hidden_tag() }}
-            <div id="logo" class="row">
-                <div class="col-md-12" align="center">
-                    <a href="/"><img  class="img-responsive" src="../static/img/portfolio/logo-title.png" alt=""></a>
-                </div>
-            </div>
-
             <div class="row">
-                <!-- known person -->
                 <div class="col-md-12">
-                    <div id="knownPerson">
+                    <!-- known person -->
+                    <span id="knownPerson" style="display: none;">
                         <div class="row" align="center">
                             <div class="col-md-12 col-sm-12 col-xs-12" id="divMaleTop" >
                                 <a href="gender">
@@ -35,25 +34,27 @@
                             </div>
                             <b><div id="playerName"></div></b>
                         </div>
-                    </div>
+                    </span>
 
                     <!-- anonymous -->
-                    <div id="anonymousAvatar">
-                        <a href="/gender"><img class="img-responsive" src="../static/img/profile.png" alt=""></a>
-                    </div>
+                    <span id="anonymousAvatar">
+                        <div class="row" align="center">
+                            <a href="/gender"><img class="img-responsive" src="../static/img/profile.png" alt=""></a>
+                        </div>
+                    </span>
                 </div>
             </div>
 
             <!-- menu -->
             <div class="row" style="margin-top: 5%"  align="center">
                 <div class="col-md-12" align="center" >
-                    <a href="/customize"><img class="img-responsive" src="../static/img/portfolio/btn-tap-to-play.png" alt=""></a>
+                    <a href="/customize"><img class="img-responsive" src="../static/img/portfolio/btn-tap-to-play.png" alt="" /></a>
                 </div>
                 <div class="col-md-12" align="center" >
-                    <img class="img-responsive" src="../static/img/portfolio/btn-how-to-play.png" alt="">
+                    <img class="img-responsive" src="../static/img/portfolio/btn-how-to-play.png" alt="" />
                 </div>
                 <div class="col-md-12" align="center" style="margin-top: 1%" >
-                    <a href="/credit"><img class="img-responsive" src="../static/img/portfolio/btn-credits.png" alt=""></a>
+                    <a href="/credit"><img class="img-responsive" src="../static/img/portfolio/btn-credits.png" alt="" /></a>
                 </div>
             </div>
 
