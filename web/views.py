@@ -92,7 +92,6 @@ def customize():
         login_user(user)
         g.user = user
         session['login'] = form.login.data
-        flash("Logged in successfully.", 'success')
         return redirect(url_for('play'))
 
     return render_template('customize.html', form=form)
@@ -109,6 +108,6 @@ def play():
 @app.route('/credit')
 def credit():
     """
-    Credit page/
+    Credit page.
     """
     return render_template('credit.html')
