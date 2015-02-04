@@ -80,8 +80,11 @@
         */
         socket.on('countdown', function(msg) {
             console.log(msg.count);
-            if (post_game!="")
-                    window[post_game]();
+            if (post_game!=""){
+                window[post_game]();
+                post_game="";
+            }
+                    
             var elements = $('#games').children();
 
             for (var i = 0; i < elements.length; i++) {
