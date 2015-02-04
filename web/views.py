@@ -52,8 +52,8 @@ def redirect_url(default='index'):
 @app.before_request
 def before_request():
     g.user = current_user
-    if g.user.is_authenticated():
-        pass
+    #if g.user.is_authenticated():
+        #pass
 
 @login_manager.user_loader
 def load_user(nic):

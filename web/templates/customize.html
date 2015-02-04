@@ -3,7 +3,7 @@
     <!-- empty div -->
     <div id="logo" class="row">
         <div class="col-md-12" align="center">
-            <a href="/"><img  class="img-responsive" src="../static/img/logo-title-customize.png" alt=""></a>
+            <a href="/"><img  class="img-responsive" src="static/img/logo-title-customize.png" alt=""></a>
         </div>
     </div>
 
@@ -24,19 +24,19 @@
             <div class="row" >
                 <div class="col-md-12 col-xs-12" id="divFemaleTop" align="center">
                     <img id="femaleTop" class="img-responsive imgConstom"
-                         src="../static/img/avatar/custom/ftop0.png" alt="" >
+                         src="static/img/avatar/custom/ftop0.png" alt="" >
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 col-xs-12" id="divFemaleMiddle" align="center">
                     <img  id="femaleMiddle" class="img-responsive imgConstom"
-                         src="../static/img/avatar/custom/fmiddle0.png" alt="" >
+                         src="static/img/avatar/custom/fmiddle0.png" alt="" >
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 col-xs-12" id="divFemaleBottom" align="center">
                     <img  id="femaleBottom" class="img-responsive imgConstom"
-                         src="../static/img/avatar/custom/fbottom0.png" alt="" >
+                         src="static/img/avatar/custom/fbottom0.png" alt="" >
                 </div>
             </div>
         </div>
@@ -45,34 +45,35 @@
             <div class="row" >
                 <div class="col-md-12 col-xs-12" id="divMaleTop" align="center">
                     <img id="maleTop" class="img-responsive imgConstom"
-                         src="../static/img/avatar/custom/mtop0.png" alt="" >
+                         src="static/img/avatar/custom/mtop0.png" alt="" >
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 col-xs-12" id="divMaleMiddle" align="center">
                     <img  id="maleMiddle" class="img-responsive imgConstom"
-                          src="../static/img/avatar/custom/mmiddle0.png" alt="" >
+                          src="static/img/avatar/custom/mmiddle0.png" alt="" >
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 col-xs-12" id="divMaleBottom" align="center">
                     <img  id="maleBottom" class="img-responsive imgConstom"
-                          src="../static/img/avatar/custom/mbottom0.png" alt="" >
+                          src="static/img/avatar/custom/mbottom0.png" alt="" >
                 </div>
             </div>
         </div>
 
-        <div class="row"  align="center" style="margin-top: 5px">
-            <div class="col-md-12" align="center" >
-                <img class="img-responsive" src="../static/img/portfolio/btn-validate.png" alt=""  onclick="sendForm()">
+        <!-- menu -->
+            <div class="row" style="margin-top: 5%"  align="center">
+                <div class="col-md-12" align="center" >
+                    <img class="img-responsive" src="{{ url_for('.static', filename='img/portfolio/btn-validate.png') }}" alt="" onclick="sendForm()" />
+                </div>
+                <div class="col-md-12" align="center" >
+                    <img class="img-responsive" src="{{ url_for('.static', filename='img/portfolio/btn-back-to-menu.png') }}" alt="" onclick="backToMenu()" />
+                </div>
+                <div class="col-md-12" align="center" style="margin-top: 1%" >
+                    <img class="img-responsive" src="{{ url_for('.static', filename='img/portfolio/btn-credits.png') }}" alt="" onclick="toCredit()" />
+                </div>
             </div>
-            <div class="col-md-12" align="center" >
-                <img class="img-responsive" src="../static/img/portfolio/btn-back-to-menu.png" alt="" onclick="backToMenu()" >
-            </div>
-            <div class="col-md-12" align="center" style="margin-top: 1%" >
-                <img class="img-responsive" src="../static/img/portfolio/btn-credits.png" alt="" onclick="toCredit()">
-            </div>
-        </div>
 </div><!-- end container -->
 <script>
     var type;
@@ -123,7 +124,7 @@
                 {name: "F4",preload: true}
             ],
             volume: 0.9,
-            path: "../static/sound/",
+            path: "static/sound/",
             preload: true
         });
 
@@ -135,9 +136,9 @@
         type = $.cookie('choice');
          $("#avatar").val(type.charAt(0) + "111");
 
-        $.cookie('topImage',"../static/img/avatar/custom/"+type.charAt(0)+"top0.png");
-        $.cookie('middleImage',"../static/img/avatar/custom/"+type.charAt(0)+"middle0.png");
-        $.cookie('buttonImage',"../static/img/avatar/custom/"+type.charAt(0)+"bottom0.png");
+        $.cookie('topImage',"static/img/avatar/custom/"+type.charAt(0)+"top0.png");
+        $.cookie('middleImage',"static/img/avatar/custom/"+type.charAt(0)+"middle0.png");
+        $.cookie('buttonImage',"static/img/avatar/custom/"+type.charAt(0)+"bottom0.png");
 
         //swipe events
         $("#divFemaleTop").swipe({
@@ -185,7 +186,7 @@
         if ( (head==1 && val==-1 ) || (head==3 && val == 1) ) return;
 
         var newHead = head + val;
-        var img = "../static/img/avatar/custom/"+ type.charAt(0)+'t-'+ head +"-" +newHead + ".gif";
+        var img = "static/img/avatar/custom/"+ type.charAt(0)+'t-'+ head +"-" +newHead + ".gif";
         var id = "#" + type+"Top";
         $(id).attr('src',img);
 
@@ -224,7 +225,7 @@
         if ( (middle==1 && val==-1 ) || (middle==3 && val == 1) ) return;
 
         var newMiddle = middle + val;
-        var img = "../static/img/avatar/custom/"+ type.charAt(0)+'m-'+ middle +"-" +newMiddle + ".gif";
+        var img = "static/img/avatar/custom/"+ type.charAt(0)+'m-'+ middle +"-" +newMiddle + ".gif";
         var id = "#" + type+"Middle";
         $(id).attr('src',img);
 
@@ -256,7 +257,7 @@
         if ( (bottom==1 && val==-1 ) || (bottom==3 && val == 1) ) return;
 
         var newBottom = bottom + val;
-        var img = "../static/img/avatar/custom/"+ type.charAt(0)+'b-'+ bottom +"-" +newBottom + ".gif";
+        var img = "static/img/avatar/custom/"+ type.charAt(0)+'b-'+ bottom +"-" +newBottom + ".gif";
         var id = "#" + type+"Bottom";
         $(id).attr('src',img);
 
