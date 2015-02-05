@@ -39,7 +39,7 @@ login_manager.init_app(app)
 #
 @app.errorhandler(401)
 def authentication_required(e):
-    flash('Authentication required.', 'info')
+    flash('You need to choose an avatar.', 'info')
     return redirect(url_for('index'))
 
 @app.errorhandler(403)
@@ -89,7 +89,7 @@ def index():
     Main page.
     """
     form = SigninForm()
-    return render_template('index.html', user=g.user, form=form)
+    return render_template('index.html', form=form)
 
 @app.route('/gender')
 def gender():
