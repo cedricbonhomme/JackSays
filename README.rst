@@ -2,10 +2,11 @@
 Jack Says
 +++++++++
 
-Jack Says is a Web-Based multiplayer game. It's a "Simon Says"-like
-(Jacques a dit in french) in which you need to follow the instruction
-given by Jack. You are competing against any person connected on the
-website... so virtually the whole world!! (tested with 20 players!!! ... :p)
+`Jack Says <https://github.com/cedricbonhomme/JackSays>`_ is a
+web-based multiplayer game. It's a "Simon Says"-like (Jacques a
+dit in french) in which you need to follow the instruction given
+by Jack. You are competing against any person connected on the website...
+so virtually the whole world!! (tested with 20 players!!! ... :p)
 
 Installation
 ============
